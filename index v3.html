@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<body lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Healthcare Professional Densities and Life Expectancy</title>
+    <link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+    <style type="text/css">
+        body{
+            margin: 0;
+            font-family: 'Quicksand', sans-serif;
+            padding: 0px 10px 10px 10px;
+            display: flex;
+        }
+
+        .label{
+            font-size: 16px;
+            font-family: 'Quicksand', sans-serif;
+            position: fixed;
+            font-weight: bolder;
+        }
+
+        .axis text {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 10px;
+            fill: black;
+        }
+
+        .axis path,
+        .axis line{
+            fill: none;
+            stroke-width: 1px;
+            stroke: black;
+        }
+
+        .circle{
+            fill-opacity: 0.65;
+        }
+
+        .bubble{
+            opacity: 1;
+            transition: opacity 0.3s;
+        }
+
+        .bubble:hover text{
+            opacity: 1;
+        }
+
+        .bubble:hover circle{
+            fill-opacity: 1;
+        }
+
+        .legend {
+            list-style: none;
+            color: black;
+            font-weight: bolder;
+        }
+        .legend li {
+            float: left;
+            margin-right: 10px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 14px;
+        }
+        .legend span {
+            border: 1px solid white;
+            float: left;
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            margin-left: -10px;
+        }
+
+        #menu {
+            margin-top: 15px;
+            flex: 2 1 auto;
+            background-color: #a0a0a0;
+            width: 300px;
+        }
+        #menu1, #menu2, #menu3, #menu4 {
+            height: 200px;
+            width: 100%;
+            flex: 1 auto;
+        }
+        h1{
+            font-size: 14px;
+            padding: 20px 10px 0px 10px;
+            margin: 0px;
+            font-weight: bolder;
+        }
+        h2{
+            position: fixed;
+        }
+
+        #container {
+            margin-top: 15px;
+            flex: 2 1 auto;
+            overflow-x: scroll;
+        }
+        #yearBar {
+            font-family: 'Quicksand', sans-serif;
+            color: white;
+            font-weight: bolder;
+            height: 20px;
+            width: 193%;
+            white-space: nowrap;
+            margin: 0px;
+            background-color: #a0a0a0;
+        }
+        #yearLabel1 {
+            float: left;
+            font-size: 14px;
+            width: 33px;
+            text-align: center;
+            height: 20px;
+        }
+        .yearLabel2 {
+            float: left;
+            font-size: 14px;
+            width: 150px;
+            text-align: center;
+            height: 20px;
+        }
+        #row1 {
+            width: 100%;
+            height: 200px;
+            white-space:nowrap;
+        }
+        #row2 {
+            width: 100%;
+            height: 200px;
+            white-space:nowrap;
+        }
+        #row3 {
+            width: 100%;
+            height: 200px;
+            white-space:nowrap;
+        }
+        #row4 {
+              width: 100%;
+              height: 200px;
+              white-space:nowrap;
+        }
+        /* Header bar links */
+        .HeaderBar a {
+            font-family: 'Handlee', cursive;
+            justify-content: center;
+            color: black;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 0px 15px 0px 15px;
+        }
+
+        /* Underline the active page's header link */
+        .HeaderBar a.active {
+            position: relative;
+            border-bottom: 3px solid white;
+        }
+
+        /* Background/spacing of header bar*/
+        .HeaderBar {
+            height: 25px;
+            position: fixed;
+            overflow: hidden;
+            background-color: #E8B9D0;
+            justify-content: space-between;
+            width: 100%;
+            padding: 5px;
+
+        }
+        a:hover {
+            color: black;
+            text-shadow:
+                    -1px -1px 0 #FFF,
+                    1px -1px 0 #FFF,
+                    -1px 1px 0 #FFF,
+                    1px 1px 0 #FFF;
+        }
+
+
+    </style>
+    <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+
+</head>
+<div class="headerContainer">
+    <div class="HeaderBar">
+        <a href="index.html">Version 1</a>
+        <a href="index v2.html">Version 2</a>
+        <a class="active" href="index v3.html">Version 3</a>
+    </div>
+</div>
+
+<div id="menu">
+    <div id="menu1">
+        <h1 style="padding-top: 40px;">Physician Density</h1>
+        <ul class="legend">
+            <li><span class="a" style="background-color: #022f77;"></span>5.2 +</li>
+            <li><span class="b" style="background-color: #3f7ee2;"></span>2.6 - 5.1</li>
+            <li><span class="c" style="background-color: #76a5f2;"></span>0.001 - 2.5</li>
+            <li><span class="d" style="background-color: #c6dcff;"></span>NULL</li>
+        </ul>
+    </div>
+    <div id="menu2"><h1>Nursing + Midwifery Personnel Density</h1>
+        <ul class="legend">
+            <li><span class="a" style="background-color: #541087;"></span>20.0 +</li>
+            <li><span class="b" style="background-color: #9a7dc6;"></span>10.0- 19.9</li>
+            <li><span class="c" style="background-color: #CDAEEF;"></span>0.001 - 9.9</li>
+            <li><span class="d" style="background-color: #EBDEF9;"></span>NULL</li>
+        </ul>
+    </div>
+    <div id="menu3"><h1>Dental Personnel Density</h1>
+        <ul class="legend">
+            <li><span class="a" style="background-color: #35491F;"></span>1.6 +</li>
+            <li><span class="b" style="background-color: #759046;"></span>0.8 - 1.5</li>
+            <li><span class="c" style="background-color: #A7C96A;"></span>0.001 - 0.7</li>
+            <li><span class="d" style="background-color: #DDFFAD;"></span>NULL</li>
+        </ul>
+    </div>
+    <div id="menu4"><h1>Pharmaceutical Personnel Density</h1>
+        <ul class="legend">
+            <li><span class="a" style="background-color: #7F0506;"></span>1.7 +</li>
+            <li><span class="b" style="background-color: #A80951;"></span>0.9 - 1.6</li>
+            <li><span class="c" style="background-color: #D90081;"></span>0.001 - 0.8</li>
+            <li><span class="d" style="background-color: #FF9FC4;"></span>NULL</li>
+        </ul>
+    </div>
+</div>
+    <div id="container">
+        <div id="yearBar">
+            <div id="yearLabel1"></div>
+            <div class="yearLabel2">2000</div>
+            <div class="yearLabel2">2001</div>
+            <div class="yearLabel2">2002</div>
+            <div class="yearLabel2">2003</div>
+            <div class="yearLabel2">2004</div>
+            <div class="yearLabel2">2005</div>
+            <div class="yearLabel2">2006</div>
+            <div class="yearLabel2">2007</div>
+            <div class="yearLabel2">2008</div>
+            <div class="yearLabel2">2009</div>
+            <div class="yearLabel2">2010</div>
+            <div class="yearLabel2">2011</div>
+            <div class="yearLabel2">2012</div>
+            <div class="yearLabel2">2013</div>
+            <div class="yearLabel2">2014</div>
+            <div class="yearLabel2">2015</div>
+        </div>
+        <div id="row1">
+
+        </div>
+        <div id="row2">
+
+        </div>
+        <div id="row3">
+
+        </div>
+        <div id="row4">
+
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+
+    window.onload = function() {
+        var margin;
+        var width;
+        var height;
+        var currYear;
+
+        for (var i=2000; i<=2015; i++) {
+            setupVis1(30, 20, 10, i);
+        }
+
+        for (var i=2000; i<=2015; i++) {
+            setupVis2(0, 0, 0, i);
+        }
+
+        for (var i=2000; i<=2015; i++) {
+            setupVis3(0, 0, 0, i);
+        }
+
+        for (var i=2000; i<=2015; i++) {
+            setupVis4(0, 0, 0, i);
+        }
+    }
+
+    function setupVis1(margin, width, height, currYear) {
+        if (currYear === 2000) {
+            margin = {top: 25, right: 0, bottom: 5, left: 40};
+            width = 180 - margin.left - margin.right;
+
+        }
+        else {
+            margin = {top: 25, right: 0, bottom: 5, left: 3};
+            width = 150 - margin.left - margin.right;
+        }
+        height = 200 - margin.top - margin.bottom;
+
+        var svg = d3.select('#row1')
+            .append('svg')
+            .attr('width', width + margin.left + margin.right)
+            .attr('height', height + margin.top + margin.bottom)
+            .append('g')
+            .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+
+
+        // The API for scales have changed in v4. There is a separate module d3-scale which can be used instead. The main change here is instead of d3.scale.linear, we have d3.scaleLinear.
+        var xScale = d3.scaleLinear()
+            .range([0, width]);
+
+        var yScale = d3.scaleLinear()
+            .range([height, 0]);
+
+        // square root scale. If I want size to change as well use this. i.e. do this for one variation. change to .range ([2,5])
+        var radius = d3.scaleSqrt()
+            .range([1, 4]);
+        // the axes are much cleaner and easier now. No need to rotate and orient the axis, just call axisBottom, axisLeft etc.
+        var xAxis = d3.axisBottom()
+            .scale(xScale)
+            .ticks(0)
+            .tickSizeOuter(0);
+
+        if (currYear === 2000) {
+            var yAxis = d3.axisLeft()
+                .scale(yScale)
+                .ticks(12)
+                .tickSizeOuter(0);
+        }
+        else {
+            var yAxis = d3.axisLeft()
+                .scale(yScale)
+                .ticks(0)
+                .tickSizeOuter(0);
+        }
+        d3.csv('583 Data Set v2 Project.csv', function (error, data) {
+            data.forEach(function (d) {
+                d.PhysicianDensity = +d.PhysicianDensity;
+                d.NursingMidwiferyDensity = +d.NursingMidwiferyDensity;
+                d.DentistryDensity = +d.DentistryDensity;
+                d.PharmaceuticalDensity = +d.PharmaceuticalDensity;
+                d.LifeExpectancy = +d.LifeExpectancy;
+            });
+
+            xScale.domain(d3.extent(data, function (d) {
+                return d.PhysicianDensity;
+            })).nice();
+
+            yScale.domain(d3.extent(data, function (d) {
+                return d.LifeExpectancy;
+            })).nice();
+
+            radius.domain(d3.extent(data, function (d) {
+                return d.PhysicianDensity;
+            })).nice();
+            
+
+
+            // adding axes is also simpler now, just translate x-axis to (0,height) and it's alread defined to be a bottom axis.
+            var xAxisElements = svg.append('g')
+                .attr('transform', 'translate(0,' + height + ')')
+                .attr('class', 'x axis')
+                .call(xAxis);
+            xAxisElements.selectAll("text").remove();
+
+            // y-axis is translated to (0,0)
+            var yAxisElements = svg.append('g')
+                .attr('transform', 'translate(0,0)')
+                .attr('class', 'y axis')
+                .call(yAxis);
+            if (currYear != 2000) {
+                yAxisElements.selectAll("text").remove();
+            }
+
+            var bubble = svg.selectAll('.bubble')
+                .data(data)
+                .enter().append('circle')
+                .filter(function (d) {
+                    return d.Year == currYear;
+                })
+                .attr('class', 'bubble')
+                .attr('cx', function (d) {
+                    return xScale (Math.random() * 7);
+                })
+                .attr('cy', function (d) {
+                    return yScale(d.LifeExpectancy);
+                })
+                .attr('r', function (d) {
+                    return radius(d.PhysicianDensity);
+                })
+                .style('fill', function (d) {
+                    if (d.PhysicianDensity == 0 || d.LifeExpectancy == 0) {
+                        return "#c6dcff";
+                    } else if (d.PhysicianDensity >= 5.2) {
+                        return "#022f77";
+                    } else if (d.PhysicianDensity >= 2.6 && d.PhysicianDensity < 5.2) {
+                        return "#3f7ee2";
+                    } else if (d.PhysicianDensity > 0 && d.PhysicianDensity < 2.6) {
+                        return "#76a5f2";
+                    }
+                });
+
+            bubble.append('title')
+                .attr('x', function (d) {
+                    return radius(d.PhysicianDensity);
+                })
+                .text(function (d) {
+                    return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["PhysicianDensity"]);
+                });
+
+            // d3 has a filter function similar to filter function in JS. Here it is used to filter d3 components.
+            bubble.on('click', function (type) {
+                d3.selectAll('.bubble')
+                    .style('opacity', 0.15)
+                    .filter(function (d) {
+                        return d.Country == type;
+                    })
+                    .style('opacity', 1);
+            })
+        })
+    }
+    function setupVis2(margin, width, height, currYear) {
+        if (currYear === 2000) {
+            margin = {top: 5, right: 0, bottom: 5, left: 40};
+            width = 180 - margin.left - margin.right;
+        }
+        else {
+            margin = {top: 5, right: 0, bottom: 5, left: 3};
+            width = 150 - margin.left - margin.right;
+        }
+        height = 200 - margin.top - margin.bottom;
+
+        var svg = d3.select('#row2')
+            .append('svg')
+            .attr('width', width + margin.left + margin.right)
+            .attr('height', height + margin.top + margin.bottom)
+            .append('g')
+            .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+
+        // The API for scales have changed in v4. There is a separate module d3-scale which can be used instead. The main change here is instead of d3.scale.linear, we have d3.scaleLinear.
+        var xScale = d3.scaleLinear()
+            .range([0, width]);
+
+        var yScale = d3.scaleLinear()
+            .range([height, 0]);
+
+        // square root scale. If I want size to change as well use this. i.e. do this for one variation. change to .range ([2,5])
+        var radius = d3.scaleSqrt()
+            .range([1, 4]);
+        // the axes are much cleaner and easier now. No need to rotate and orient the axis, just call axisBottom, axisLeft etc.
+        var xAxis = d3.axisBottom()
+            .scale(xScale)
+            .ticks(0)
+            .tickSizeOuter(0);
+
+        if (currYear === 2000) {
+            var yAxis = d3.axisLeft()
+                .scale(yScale)
+                .ticks(12)
+                .tickSizeOuter(0);
+        }
+        else {
+            var yAxis = d3.axisLeft()
+                .scale(yScale)
+                .ticks(0)
+                .tickSizeOuter(0);
+        }
+        d3.csv('583 Data Set v2 Project.csv', function (error, data) {
+            data.forEach(function (d) {
+                d.PhysicianDensity = +d.PhysicianDensity;
+                d.NursingMidwiferyDensity = +d.NursingMidwiferyDensity;
+                d.DentistryDensity = +d.DentistryDensity;
+                d.PharmaceuticalDensity = +d.PharmaceuticalDensity;
+                d.LifeExpectancy = +d.LifeExpectancy;
+            });
+
+            xScale.domain(d3.extent(data, function (d) {
+                return d.NursingMidwiferyDensity;
+            })).nice();
+
+            yScale.domain(d3.extent(data, function (d) {
+                return d.LifeExpectancy;
+            })).nice();
+
+            radius.domain(d3.extent(data, function (d) {
+                return d.NursingMidwiferyDensity;
+            })).nice();
+
+            // adding axes is also simpler now, just translate x-axis to (0,height) and it's alread defined to be a bottom axis.
+            var xAxisElements = svg.append('g')
+                .attr('transform', 'translate(0,' + height + ')')
+                .attr('class', 'x axis')
+                .call(xAxis);
+            xAxisElements.selectAll("text").remove();
+            // y-axis is translated to (0,0)
+            var yAxisElements = svg.append('g')
+                .attr('transform', 'translate(0,0)')
+                .attr('class', 'y axis')
+                .call(yAxis);
+            if (currYear != 2000) {
+                yAxisElements.selectAll("text").remove();
+            }
+
+            var bubble = svg.selectAll('.bubble')
+                .data(data)
+                .enter().append('circle')
+                .filter(function (d) {
+                    return d.Year == currYear;
+                })
+                .attr('class', 'bubble')
+                .attr('cx', function (d) {
+                    return xScale (Math.random() * 30);
+                })
+                .attr('cy', function (d) {
+                    return yScale(d.LifeExpectancy);
+                })
+                .attr('r', function (d) {
+                    return radius(d.NursingMidwiferyDensity);
+                })
+                .style('fill', function (d) {
+                    if (d.NursingMidwiferyDensity == 0 || d.LifeExpectancy == 0) {
+                        return "#EBDEF9";
+                    } else if (d.NursingMidwiferyDensity >= 20) {
+                        return "#541087";
+                    } else if (d.NursingMidwiferyDensity >= 10 && d.NursingMidwiferyDensity < 20) {
+                        return "#9A7DC6";
+                    } else if (d.NursingMidwiferyDensity > 0 && d.NursingMidwiferyDensity < 10) {
+                        return "#CDAEFF";
+                    }
+                });
+            bubble.append('title')
+                .attr('x', function (d) {
+                    return radius(d.NursingMidwiferyDensity);
+                })
+                .text(function (d) {
+                    return ("Country: " + d["Country"] + " Year:  " + d["Year"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["NursingMidwiferyDensity"]);
+                });
+            // d3 has a filter function similar to filter function in JS. Here it is used to filter d3 components.
+            bubble.on('click', function (type) {
+                d3.selectAll('.bubble')
+                    .style('opacity', 0.15)
+                    .filter(function (d) {
+                        return d.Country == type;
+                    })
+                    .style('opacity', 1);
+            })
+        })
+    }
+
+    function setupVis3(margin, width, height, currYear) {
+        if (currYear === 2000) {
+            margin = {top: 5, right: 0, bottom: 5, left: 40};
+            width = 180 - margin.left - margin.right;
+        }
+        else {
+            margin = {top: 5, right: 0, bottom: 5, left: 3};
+            width = 150 - margin.left - margin.right;
+        }
+        height = 200 - margin.top - margin.bottom;
+
+        var svg = d3.select('#row3')
+            .append('svg')
+            .attr('width', width + margin.left + margin.right)
+            .attr('height', height + margin.top + margin.bottom)
+            .append('g')
+            .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+
+        // The API for scales have changed in v4. There is a separate module d3-scale which can be used instead. The main change here is instead of d3.scale.linear, we have d3.scaleLinear.
+        var xScale = d3.scaleLinear()
+            .range([0, width]);
+
+        var yScale = d3.scaleLinear()
+            .range([height, 0]);
+
+        // square root scale. If I want size to change as well use this. i.e. do this for one variation. change to .range ([2,5])
+        var radius = d3.scaleSqrt()
+            .range([1, 4]);
+        // the axes are much cleaner and easier now. No need to rotate and orient the axis, just call axisBottom, axisLeft etc.
+        var xAxis = d3.axisBottom()
+            .scale(xScale)
+            .ticks(0)
+            .tickSizeOuter(0);
+
+        if (currYear === 2000) {
+            var yAxis = d3.axisLeft()
+                .scale(yScale)
+                .ticks(12)
+                .tickSizeOuter(0);
+        }
+        else {
+            var yAxis = d3.axisLeft()
+                .scale(yScale)
+                .ticks(0)
+                .tickSizeOuter(0);
+        }
+        d3.csv('583 Data Set v2 Project.csv', function (error, data) {
+            data.forEach(function (d) {
+                d.PhysicianDensity = +d.PhysicianDensity;
+                d.NursingMidwiferyDensity = +d.NursingMidwiferyDensity;
+                d.DentistryDensity = +d.DentistryDensity;
+                d.PharmaceuticalDensity = +d.PharmaceuticalDensity;
+                d.LifeExpectancy = +d.LifeExpectancy;
+            });
+
+            xScale.domain(d3.extent(data, function (d) {
+                return d.DentistryDensity;
+            })).nice();
+
+            yScale.domain(d3.extent(data, function (d) {
+                return d.LifeExpectancy;
+            })).nice();
+
+            radius.domain(d3.extent(data, function (d) {
+                return d.DentistryDensity;
+            })).nice();
+
+            // adding axes is also simpler now, just translate x-axis to (0,height) and it's alread defined to be a bottom axis.
+            var xAxisElements = svg.append('g')
+                .attr('transform', 'translate(0,' + height + ')')
+                .attr('class', 'x axis')
+                .call(xAxis);
+            xAxisElements.selectAll("text").remove();
+
+
+            // y-axis is translated to (0,0)
+            var yAxisElements = svg.append('g')
+                .attr('transform', 'translate(0,0)')
+                .attr('class', 'y axis')
+                .call(yAxis);
+            if (currYear != 2000) {
+                yAxisElements.selectAll("text").remove();
+            }
+
+            var bubble = svg.selectAll('.bubble')
+                .data(data)
+                .enter().append('circle')
+                .filter(function (d) {
+                    return d.Year == currYear;
+                })
+                .attr('class', 'bubble')
+                .attr('cx', function (d) {
+                    return xScale (Math.random() * 2.3);
+                })
+                .attr('cy', function (d) {
+                    return yScale(d.LifeExpectancy);
+                })
+                .attr('r', function (d) {
+                    return radius(d.DentistryDensity);
+                })
+                .style('fill', function (d) {
+                    if (d.DentistryDensity == 0 || d.LifeExpectancy == 0) {
+                        return "#DDFFAD";
+                    } else if (d.DentistryDensity >= 1.6) {
+                        return "#35491F";
+                    } else if (d.DentistryDensity >= 0.8 && d.DentistryDensity < 1.6) {
+                        return "#759046";
+                    } else if (d.DentistryDensity > 0 && d.DentistryDensity < 0.8) {
+                        return "#A7C96A";
+                    }
+                });
+
+            bubble.append('title')
+                .attr('x', function (d) {
+                    return radius(d.DentistryDensity);
+                })
+                .text(function (d) {
+                    return ("Country: " + d["Country"] + " Year:  " + d["Year"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["DentistryDensity"]);
+                });
+
+            // d3 has a filter function similar to filter function in JS. Here it is used to filter d3 components.
+            bubble.on('click', function (type) {
+                d3.selectAll('.bubble')
+                    .style('opacity', 0.15)
+                    .filter(function (d) {
+                        return d.Country == type;
+                    })
+                    .style('opacity', 1);
+            })
+        })
+    }
+
+    function setupVis4(margin, width, height, currYear) {
+        if (currYear === 2000) {
+            margin = {top: 5, right: 0, bottom: 5, left: 40};
+            width = 180 - margin.left - margin.right;
+
+        }
+        else {
+            margin = {top: 5, right: 0, bottom: 5, left: 3};
+            width = 150 - margin.left - margin.right;
+
+        }
+        height = 200 - margin.top - margin.bottom;
+
+        var svg = d3.select('#row4')
+            .append('svg')
+            .attr('width', width + margin.left + margin.right)
+            .attr('height', height + margin.top + margin.bottom)
+            .append('g')
+            .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+
+        // The API for scales have changed in v4. There is a separate module d3-scale which can be used instead. The main change here is instead of d3.scale.linear, we have d3.scaleLinear.
+        var xScale = d3.scaleLinear()
+            .range([0, width]);
+
+        var yScale = d3.scaleLinear()
+            .range([height, 0]);
+
+        // square root scale. If I want size to change as well use this. i.e. do this for one variation. change to .range ([2,5])
+        var radius = d3.scaleSqrt()
+            .range([1, 4]);
+        // the axes are much cleaner and easier now. No need to rotate and orient the axis, just call axisBottom, axisLeft etc.
+        var xAxis = d3.axisBottom()
+            .scale(xScale)
+            .ticks(0)
+            .tickSizeOuter(0);
+
+        if (currYear === 2000) {
+            var yAxis = d3.axisLeft()
+                .scale(yScale)
+                .ticks(12)
+                .tickSizeOuter(0);
+        }
+        else {
+            var yAxis = d3.axisLeft()
+                .scale(yScale)
+                .ticks(0)
+                .tickSizeOuter(0);
+        }
+
+        d3.csv('583 Data Set v2 Project.csv', function (error, data) {
+            data.forEach(function (d) {
+                d.PhysicianDensity = +d.PhysicianDensity;
+                d.NursingMidwiferyDensity = +d.NursingMidwiferyDensity;
+                d.DentistryDensity = +d.DentistryDensity;
+                d.PharmaceuticalDensity = +d.PharmaceuticalDensity;
+                d.LifeExpectancy = +d.LifeExpectancy;
+            });
+
+            xScale.domain(d3.extent(data, function (d) {
+                return d.PharmaceuticalDensity;
+            })).nice();
+
+            yScale.domain(d3.extent(data, function (d) {
+                return d.LifeExpectancy;
+            })).nice();
+
+            radius.domain(d3.extent(data, function (d) {
+                return d.PharmaceuticalDensity;
+            })).nice();
+
+            // adding axes is also simpler now, just translate x-axis to (0,height) and it's alread defined to be a bottom axis.
+            var xAxisElements = svg.append('g')
+                .attr('transform', 'translate(0,' + height + ')')
+                .attr('class', 'x axis')
+                .call(xAxis);
+            xAxisElements.selectAll("text").remove();
+
+
+            // y-axis is translated to (0,0)
+            var yAxisElements = svg.append('g')
+                .attr('transform', 'translate(0,0)')
+                .attr('class', 'y axis')
+                .call(yAxis);
+            if (currYear != 2000) {
+                yAxisElements.selectAll("text").remove();
+            }
+
+            var bubble = svg.selectAll('.bubble')
+                .data(data)
+                .enter().append('circle')
+                .filter(function (d) {
+                    return d.Year == currYear;
+                })
+                .attr('class', 'bubble')
+                .attr('cx', function (d) {
+                    return xScale (Math.random() * 2.5);
+                })
+                .attr('cy', function (d) {
+                    return yScale(d.LifeExpectancy);
+                })
+                .attr('r', function (d) {
+                    return radius(d.PharmaceuticalDensity);
+                })
+                .style('fill', function (d) {
+                    if (d.PharmaceuticalDensity == 0 || d.LifeExpectancy == 0) {
+                        return "#FF9FC4";
+                    } else if (d.PharmaceuticalDensity >= 1.7) {
+                        return "#7F0506";
+                    } else if (d.PharmaceuticalDensity >= 0.9 && d.PharmaceuticalDensity < 1.7) {
+                        return "#A80951";
+                    } else if (d.PharmaceuticalDensity > 0 && d.PharmaceuticalDensity < 0.9) {
+                        return "#D90081";
+                    }
+                });
+            bubble.append('title')
+                .attr('x', function (d) {
+                    return radius(d.PharmaceuticalDensity);
+                })
+                .text(function (d) {
+                    return ("Country: " + d["Country"] + " Year:  " + d["Year"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["PharmaceuticalDensity"]);
+                });
+
+            // d3 has a filter function similar to filter function in JS. Here it is used to filter d3 components.
+            bubble.on('click', function (type) {
+                d3.selectAll('.bubble')
+                    .style('opacity', 0.15)
+                    .filter(function (d) {
+                        return d.Country == type;
+                    })
+                    .style('opacity', 1);
+            })
+        })
+    }
+</script>
+
+</body>
+</html>
