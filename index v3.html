@@ -100,6 +100,7 @@
             overflow-x: scroll;
         }
         #yearBar {
+            overflow: hidden;
             margin-top: 20px;
             font-family: 'Quicksand', sans-serif;
             color: black;
@@ -178,7 +179,14 @@
                     -1px 1px 0 #FFF,
                     1px 1px 0 #FFF;
         }
-
+        @media screen and (max-width: 1000px) {
+            h1 {
+                font-size: 12px;
+            }
+            .legend li {
+                font-size: 10px;
+            }
+        }
 
     </style>
     <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
