@@ -316,17 +316,17 @@
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
 
-        // The API for scales have changed in v4. There is a separate module d3-scale which can be used instead. The main change here is instead of d3.scale.linear, we have d3.scaleLinear.
+        // Scales
         var xScale = d3.scaleLinear()
             .range([0, width]);
 
         var yScale = d3.scaleLinear()
             .range([height, 0]);
 
-        // square root scale. If I want size to change as well use this. i.e. do this for one variation. change to .range ([2,5])
+        // Changes the size of the points
         var radius = d3.scaleSqrt()
             .range([3, 3]);
-        // the axes are much cleaner and easier now. No need to rotate and orient the axis, just call axisBottom, axisLeft etc.
+        // Axes
         var xAxis = d3.axisBottom()
             .scale(xScale)
             .ticks(0)
@@ -366,15 +366,12 @@
             })).nice();
             
 
-
-            // adding axes is also simpler now, just translate x-axis to (0,height) and it's alread defined to be a bottom axis.
             var xAxisElements = svg.append('g')
                 .attr('transform', 'translate(0,' + height + ')')
                 .attr('class', 'x axis')
                 .call(xAxis);
             xAxisElements.selectAll("text").remove();
 
-            // y-axis is translated to (0,0)
             var yAxisElements = svg.append('g')
                 .attr('transform', 'translate(0,0)')
                 .attr('class', 'y axis')
@@ -410,18 +407,6 @@
                         return "#76a5f2";
                     }
                 });
-
-            /*
-            if (currYear === 2000) {
-                svg.append('text')
-                    .attr('x', 10)
-                    .attr('y', 10)
-                    .attr('class', 'label')
-                    .text('Sepal Width');
-
-            }
-            */
-
 
             bubble.append('title')
                 .attr('x', function (d) {
@@ -460,17 +445,14 @@
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
 
-        // The API for scales have changed in v4. There is a separate module d3-scale which can be used instead. The main change here is instead of d3.scale.linear, we have d3.scaleLinear.
         var xScale = d3.scaleLinear()
             .range([0, width]);
 
         var yScale = d3.scaleLinear()
             .range([height, 0]);
 
-        // square root scale. If I want size to change as well use this. i.e. do this for one variation. change to .range ([2,5])
         var radius = d3.scaleSqrt()
             .range([3, 3]);
-        // the axes are much cleaner and easier now. No need to rotate and orient the axis, just call axisBottom, axisLeft etc.
         var xAxis = d3.axisBottom()
             .scale(xScale)
             .ticks(0)
@@ -509,7 +491,6 @@
                 return d.NursingMidwiferyDensity;
             })).nice();
 
-            // adding axes is also simpler now, just translate x-axis to (0,height) and it's alread defined to be a bottom axis.
             var xAxisElements = svg.append('g')
                 .attr('transform', 'translate(0,' + height + ')')
                 .attr('class', 'x axis')
@@ -589,17 +570,14 @@
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
 
-        // The API for scales have changed in v4. There is a separate module d3-scale which can be used instead. The main change here is instead of d3.scale.linear, we have d3.scaleLinear.
         var xScale = d3.scaleLinear()
             .range([0, width]);
 
         var yScale = d3.scaleLinear()
             .range([height, 0]);
 
-        // square root scale. If I want size to change as well use this. i.e. do this for one variation. change to .range ([2,5])
         var radius = d3.scaleSqrt()
             .range([3, 3]);
-        // the axes are much cleaner and easier now. No need to rotate and orient the axis, just call axisBottom, axisLeft etc.
         var xAxis = d3.axisBottom()
             .scale(xScale)
             .ticks(0)
@@ -638,7 +616,6 @@
                 return d.DentistryDensity;
             })).nice();
 
-            // adding axes is also simpler now, just translate x-axis to (0,height) and it's alread defined to be a bottom axis.
             var xAxisElements = svg.append('g')
                 .attr('transform', 'translate(0,' + height + ')')
                 .attr('class', 'x axis')
@@ -646,7 +623,6 @@
             xAxisElements.selectAll("text").remove();
 
 
-            // y-axis is translated to (0,0)
             var yAxisElements = svg.append('g')
                 .attr('transform', 'translate(0,0)')
                 .attr('class', 'y axis')
@@ -691,7 +667,6 @@
                     return ("Country: " + d["Country"] + " Year:  " + d["Year"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["DentistryDensity"]);
                 });
 
-            // d3 has a filter function similar to filter function in JS. Here it is used to filter d3 components.
             bubble.on('click', function (type) {
                 d3.selectAll('.bubble')
                     .style('opacity', 0.15)
@@ -724,17 +699,14 @@
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
 
-        // The API for scales have changed in v4. There is a separate module d3-scale which can be used instead. The main change here is instead of d3.scale.linear, we have d3.scaleLinear.
         var xScale = d3.scaleLinear()
             .range([0, width]);
 
         var yScale = d3.scaleLinear()
             .range([height, 0]);
 
-        // square root scale. If I want size to change as well use this. i.e. do this for one variation. change to .range ([2,5])
         var radius = d3.scaleSqrt()
             .range([3, 3]);
-        // the axes are much cleaner and easier now. No need to rotate and orient the axis, just call axisBottom, axisLeft etc.
         var xAxis = d3.axisBottom()
             .scale(xScale)
             .ticks(0)
@@ -774,15 +746,12 @@
                 return d.PharmaceuticalDensity;
             })).nice();
 
-            // adding axes is also simpler now, just translate x-axis to (0,height) and it's alread defined to be a bottom axis.
             var xAxisElements = svg.append('g')
                 .attr('transform', 'translate(0,' + height + ')')
                 .attr('class', 'x axis')
                 .call(xAxis);
             xAxisElements.selectAll("text").remove();
 
-
-            // y-axis is translated to (0,0)
             var yAxisElements = svg.append('g')
                 .attr('transform', 'translate(0,0)')
                 .attr('class', 'y axis')

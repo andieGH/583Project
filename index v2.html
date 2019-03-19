@@ -11,7 +11,6 @@
         body{
             margin: 0;
             font-family: 'Quicksand', sans-serif;
-            padding: 0px 10px 10px 10px;
             display: flex;
         }
 
@@ -308,19 +307,15 @@
             .append('g')
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
-
-        // The API for scales have changed in v4. There is a separate module d3-scale which can be used instead. The main change here is instead of d3.scale.linear, we have d3.scaleLinear.
         var xScale = d3.scaleLinear()
             .range([0, width]);
 
         var yScale = d3.scaleLinear()
             .range([height, 0]);
 
-        // square root scale. If I want size to change as well use this. i.e. do this for one variation. change to .range ([2,5])
         var radius = d3.scaleSqrt()
             .range([3, 3]);
 
-        // the axes are much cleaner and easier now. No need to rotate and orient the axis, just call axisBottom, axisLeft etc.
         var xAxis = d3.axisBottom()
             .scale(xScale)
             .ticks(8)
@@ -359,9 +354,6 @@
                 return d.PhysicianDensity;
             })).nice();
             
-
-
-            // adding axes is also simpler now, just translate x-axis to (0,height) and it's alread defined to be a bottom axis.
             var xAxisElements = svg.append('g')
                 .attr('transform', 'translate(0,' + height + ')')
                 .attr('class', 'x axis')
@@ -410,7 +402,6 @@
                 .text(function (d) {
                     return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["PhysicianDensity"]);
                 });
-            // d3 has a filter function similar to filter function in JS. Here it is used to filter d3 components.
             bubble.on('click', function (type) {
                 d3.selectAll('.bubble')
                     .style('opacity', 0.15)
@@ -439,18 +430,14 @@
             .append('g')
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-
-        // The API for scales have changed in v4. There is a separate module d3-scale which can be used instead. The main change here is instead of d3.scale.linear, we have d3.scaleLinear.
         var xScale = d3.scaleLinear()
             .range([0, width]);
 
         var yScale = d3.scaleLinear()
             .range([height, 0]);
 
-        // square root scale. If I want size to change as well use this. i.e. do this for one variation. change to .range ([2,5])
         var radius = d3.scaleSqrt()
             .range([3, 3]);
-        // the axes are much cleaner and easier now. No need to rotate and orient the axis, just call axisBottom, axisLeft etc.
         var xAxis = d3.axisBottom()
             .scale(xScale)
             .ticks(8)
@@ -489,7 +476,6 @@
                 return d.NursingMidwiferyDensity;
             })).nice();
 
-            // adding axes is also simpler now, just translate x-axis to (0,height) and it's alread defined to be a bottom axis.
             var xAxisElements = svg.append('g')
                 .attr('transform', 'translate(0,' + height + ')')
                 .attr('class', 'x axis')
@@ -537,7 +523,6 @@
                 .text(function (d) {
                     return ("Country: " + d["Country"] + " Year:  " + d["Year"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["NursingMidwiferyDensity"]);
                 });
-            // d3 has a filter function similar to filter function in JS. Here it is used to filter d3 components.
             bubble.on('click', function (type) {
                 d3.selectAll('.bubble')
                     .style('opacity', 0.15)
@@ -568,17 +553,14 @@
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
 
-        // The API for scales have changed in v4. There is a separate module d3-scale which can be used instead. The main change here is instead of d3.scale.linear, we have d3.scaleLinear.
         var xScale = d3.scaleLinear()
             .range([0, width]);
 
         var yScale = d3.scaleLinear()
             .range([height, 0]);
 
-        // square root scale. If I want size to change as well use this. i.e. do this for one variation. change to .range ([2,5])
         var radius = d3.scaleSqrt()
             .range([3, 3]);
-        // the axes are much cleaner and easier now. No need to rotate and orient the axis, just call axisBottom, axisLeft etc.
         var xAxis = d3.axisBottom()
             .scale(xScale)
             .ticks(8)
@@ -617,7 +599,6 @@
                 return d.DentistryDensity;
             })).nice();
 
-            // adding axes is also simpler now, just translate x-axis to (0,height) and it's alread defined to be a bottom axis.
             var xAxisElements = svg.append('g')
                 .attr('transform', 'translate(0,' + height + ')')
                 .attr('class', 'x axis')
@@ -669,7 +650,6 @@
                     return ("Country: " + d["Country"] + " Year:  " + d["Year"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["DentistryDensity"]);
                 });
 
-            // d3 has a filter function similar to filter function in JS. Here it is used to filter d3 components.
             bubble.on('click', function (type) {
                 d3.selectAll('.bubble')
                     .style('opacity', 0.15)
@@ -701,18 +681,14 @@
             .append('g')
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-
-        // The API for scales have changed in v4. There is a separate module d3-scale which can be used instead. The main change here is instead of d3.scale.linear, we have d3.scaleLinear.
         var xScale = d3.scaleLinear()
             .range([0, width]);
 
         var yScale = d3.scaleLinear()
             .range([height, 0]);
 
-        // square root scale. If I want size to change as well use this. i.e. do this for one variation. change to .range ([2,5])
         var radius = d3.scaleSqrt()
             .range([3, 3]);
-        // the axes are much cleaner and easier now. No need to rotate and orient the axis, just call axisBottom, axisLeft etc.
         var xAxis = d3.axisBottom()
             .scale(xScale)
             .ticks(8)
@@ -752,7 +728,6 @@
                 return d.PharmaceuticalDensity;
             })).nice();
 
-            // adding axes is also simpler now, just translate x-axis to (0,height) and it's alread defined to be a bottom axis.
             var xAxisElements = svg.append('g')
                 .attr('transform', 'translate(0,' + height + ')')
                 .attr('class', 'x axis')
@@ -802,7 +777,6 @@
                     return ("Country: " + d["Country"] + " Year:  " + d["Year"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["PharmaceuticalDensity"]);
                 });
 
-            // d3 has a filter function similar to filter function in JS. Here it is used to filter d3 components.
             bubble.on('click', function (type) {
                 d3.selectAll('.bubble')
                     .style('opacity', 0.15)
