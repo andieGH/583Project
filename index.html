@@ -81,9 +81,8 @@
 
         #menu {
             margin-top: 0px;
-            flex: 2 1 auto;
+            flex: 0 0 150px;
             background-color: #d8d6d6;
-            width: 300px;
         }
         #menu1, #menu2, #menu3, #menu4 {
             height: 175px;
@@ -108,13 +107,13 @@
         }
         h1{
             font-size: 14px;
-            padding: 10px 10px 0px 10px;
+            padding: 0px 10px 0px 10px;
             margin: 0px;
             font-weight: bolder;
             text-align: center;
         }
         #container {
-            flex: 2 1 auto;
+            flex: 0 1 auto;
             overflow-x: scroll;
             overflow-y: hidden;
         }
@@ -141,8 +140,32 @@
             width: 100%;
             height: 175px;
             white-space:nowrap;
+            float: right;
+        }
+        #axis {
+           width: 20px;
+           height: 100%;
+           background-color: white;
+            float: left;
+            border-bottom: 1px solid black;
+            border-left: 1px solid black;
+
         }
 
+        h3 {
+            line-height: 4;
+            font-size: 12px;
+            transform: rotate(-90deg);
+
+        }
+
+        #space3{
+            white-space:nowrap;
+            float: left;
+            width: 20px;
+            height: 20px;
+            background-color: #d8d6d6;
+        }
         #spaceForScroll {
             width: 100%;
             height: 5px;
@@ -173,13 +196,16 @@
             float: right;
             margin-left: 5px;
             margin-right: 20px;
+            border: 1px solid mediumvioletred;
+
         }
 
         input {
+            border: 1px solid mediumvioletred;
             width: 150px;
             float: right;
-            height: 23px;
-            line-height: 1;
+            height: 25px;
+            line-height: 0.5;
             vertical-align: middle;
             margin-right: 10px;
         }
@@ -215,7 +241,7 @@
 </head>
     <div class="headerContainer">
         <div class="HeaderBar">
-            <p>Density of Healthcare Professionals per Country</p>
+            <p>Life Expectancy & Density of Healthcare Professionals per Country</p>
             <span>
                 <button onclick="clearClick()">Clear Selection</button>
             </span>
@@ -276,7 +302,10 @@
         </div>
 
         <div id="container">
+
             <div id="yearBar">
+                <div id="space3"></div>
+
                 <div class="yearLabel">2000</div>
                 <div class="yearLabel">2001</div>
                 <div class="yearLabel">2002</div>
@@ -295,16 +324,21 @@
                 <div class="yearLabel">2015</div>
             </div>
             <div id="row1">
-
+                <div id="axis">
+                </div>
             </div>
             <div id="row2">
-
+                <div id="axis">
+                </div>
             </div>
             <div id="row3">
-
+                <div id="axis">
+                    <h3>Life Expectancy</h3>
+                </div>
             </div>
             <div id="row4">
-
+                <div id="axis">
+                </div>
             </div>
             <div id="spaceForScroll">
 
@@ -821,6 +855,8 @@
             .select(function (d) {
                 return d["Country"] === data["Country"] ? this : null
             })
+                .transition()
+                .attr("r", 10.0)
                 .style('stroke', function (d) {
                 if (d.PharmaceuticalDensity == 0) {
                     return "#FF9FC4";
@@ -842,6 +878,8 @@
             .select(function (d) {
                 return d["Country"] === data["Country"] ? this : null
             })
+            .transition()
+            .attr("r", 10.0)
             .style('stroke', function (d) {
                 if (d.DentistryDensity == 0) {
                     return "#DDFFAD";
@@ -862,6 +900,8 @@
             .select(function (d) {
                 return d["Country"] === data["Country"] ? this : null
             })
+            .transition()
+            .attr("r", 10.0)
             .style('stroke', function (d) {
                 if (d.NursingMidwiferyDensity == 0) {
                     return "#EBDEF9";
@@ -882,6 +922,8 @@
             .select(function (d) {
                 return d["Country"] === data["Country"] ? this : null
             })
+            .transition()
+            .attr("r", 10.0)
             .style('stroke', function (d) {
                 if (d.PhysicianDensity == 0) {
                     return "#c6dcff";
