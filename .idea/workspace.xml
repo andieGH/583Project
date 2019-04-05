@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4a37c769-c27d-4528-a40c-98c68e9af6b7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/index v2.html" beforeDir="false" afterPath="$PROJECT_DIR$/index v2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index v3.html" beforeDir="false" afterPath="$PROJECT_DIR$/index v3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -20,8 +19,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11310">
-              <caret line="754" column="12" selection-start-line="754" selection-start-column="12" selection-end-line="754" selection-end-column="12" />
+            <state relative-caret-position="403">
+              <caret line="908" column="31" selection-start-line="908" selection-start-column="31" selection-end-line="908" selection-end-column="31" />
+              <folding>
+                <element signature="n#style#0;n#span#0;n#li#0;n#ul#0;n#div#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#li#3;n#ul#0;n#div#3;n#div#1;n#body#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -29,7 +32,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index v2.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
+            <state relative-caret-position="-11064">
               <caret line="13" selection-start-line="13" selection-end-line="13" />
             </state>
           </provider>
@@ -38,8 +41,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index v3.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
-              <caret line="13" selection-start-line="13" selection-end-line="13" />
+            <state relative-caret-position="897">
+              <caret line="355" column="23" lean-forward="true" selection-start-line="355" selection-start-column="23" selection-end-line="355" selection-end-column="23" />
               <folding>
                 <element signature="n#style#0;n#span#0;n#li#0;n#ul#0;n#div#0;n#div#1;n#body#0;n#!!top" expanded="true" />
               </folding>
@@ -68,27 +71,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>xMap</find>
-      <find>lifeexpec</find>
-      <find>physician</find>
-      <find>physiciande</find>
-      <find>cvalue</find>
-      <find>color</find>
-      <find>gAge</find>
       <find>phys</find>
       <find>species</find>
       <find>legeng</find>
       <find>hover</find>
       <find>age</find>
       <find>gender</find>
-      <find>country</find>
-      <find>title</find>
       <find>year</find>
       <find>.axis</find>
       <find>svg.append</find>
       <find>append</find>
       <find>xvalue</find>
       <find>yAxisElements</find>
+      <find>country</find>
+      <find>circle</find>
+      <find>title</find>
+      <find>datum</find>
+      <find>click</find>
+      <find>.attr(&quot;cl</find>
+      <find>.ticks(</find>
+      <find>axis</find>
+      <find>overflow</find>
+      <find>scroll</find>
+      <find>height =</find>
+      <find>border</find>
+      <find>return d.Life</find>
+      <find>border-bottom</find>
+      <find>width =</find>
+      <find>&quot;r&quot;</find>
+      <find>var radius</find>
+      <find>clicks</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -104,16 +116,17 @@
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.html" />
         <option value="$PROJECT_DIR$/example.html" />
         <option value="$PROJECT_DIR$/example2.html" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/index v3.html" />
         <option value="$PROJECT_DIR$/index v2.html" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_1.html" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="225" />
+    <option name="x" value="115" />
     <option name="y" value="23" />
-    <option name="width" value="949" />
+    <option name="width" value="1172" />
     <option name="height" value="850" />
   </component>
   <component name="ProjectView">
@@ -128,6 +141,15 @@
               <item name="583Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="583Project" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="583Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+            </path>
+            <path>
+              <item name="583Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+              <item name="Scratches" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -139,6 +161,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="HTML" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -173,21 +196,24 @@
       <option name="presentableId" value="Default" />
       <updated>1552332742356</updated>
       <workItem from="1552332743528" duration="59374000" />
-      <workItem from="1552939810671" duration="2076000" />
+      <workItem from="1552939810671" duration="2646000" />
+      <workItem from="1553803639931" duration="1883000" />
+      <workItem from="1553890058370" duration="485000" />
+      <workItem from="1554088876256" duration="38244000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61450000" />
+    <option name="totallyTimeSpent" value="102632000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="225" y="23" width="949" height="850" extended-state="0" />
+    <frame x="115" y="23" width="1172" height="850" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="1" weight="0.18857759" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="0" />
+      <window_info anchor="bottom" id="Terminal" order="0" weight="0.3298153" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="2" />
       <window_info anchor="bottom" id="Docker" order="3" show_stripe_button="false" />
@@ -230,31 +256,13 @@
     <entry file="file://$PROJECT_DIR$/tutorial5.js" />
     <entry file="file://$PROJECT_DIR$/../CPSC 583 - Laptop/Tutorials/Tutorial 1/tutorial1.html" />
     <entry file="file://$PROJECT_DIR$/../CPSC 583 - Laptop/Tutorials/Tutorial 1/tutorial1.css" />
-    <entry file="file://$USER_HOME$/Downloads/tutorial_week2/tutorial2.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/tutorial_week2/index.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/tutorial_week2/tutorial2.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/tutorial_week3/tutorial3.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/tutorial_week3/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="22" selection-start-line="6" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/tutorial_week3/tutorial3.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/tutorial_week3/betterlifeindex.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$USER_HOME$/Downloads/tutorial_week2/tutorial2.css" />
+    <entry file="file://$USER_HOME$/Downloads/tutorial_week2/index.html" />
+    <entry file="file://$USER_HOME$/Downloads/tutorial_week2/tutorial2.js" />
+    <entry file="file://$USER_HOME$/Downloads/tutorial_week3/tutorial3.js" />
+    <entry file="file://$USER_HOME$/Downloads/tutorial_week3/index.html" />
+    <entry file="file://$USER_HOME$/Downloads/tutorial_week3/tutorial3.css" />
+    <entry file="file://$USER_HOME$/Downloads/tutorial_week3/betterlifeindex.csv" />
     <entry file="file://$PROJECT_DIR$/583project.js" />
     <entry file="file://$PROJECT_DIR$/test.html" />
     <entry file="file://$PROJECT_DIR$/cereal.csv" />
@@ -271,6 +279,31 @@
     <entry file="file://$PROJECT_DIR$/../CPSC 583 - Laptop/Tutorials/Tutorial 5/index.html" />
     <entry file="file://$PROJECT_DIR$/583project.html" />
     <entry file="file://$PROJECT_DIR$/example2.html" />
+    <entry file="file://$PROJECT_DIR$/583project.css" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="735">
+          <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../CPSC 583 - Laptop/583Project Extra Files/tt.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="15" lean-forward="true" selection-start-column="15" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../CPSC 583 - Laptop/583Project Extra Files/project2.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index v2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-11064">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/583 Data Set v2 Project.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -278,30 +311,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/583project.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/index v3.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        <state relative-caret-position="897">
+          <caret line="355" column="23" lean-forward="true" selection-start-line="355" selection-start-column="23" selection-end-line="355" selection-end-column="23" />
           <folding>
             <element signature="n#style#0;n#span#0;n#li#0;n#ul#0;n#div#0;n#div#1;n#body#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index v2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11310">
-          <caret line="754" column="12" selection-start-line="754" selection-start-column="12" selection-end-line="754" selection-end-column="12" />
+        <state relative-caret-position="403">
+          <caret line="908" column="31" selection-start-line="908" selection-start-column="31" selection-end-line="908" selection-end-column="31" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#li#0;n#ul#0;n#div#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#li#3;n#ul#0;n#div#3;n#div#1;n#body#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -27,10 +27,16 @@
             fill: black;
         }
 
-        .axis path,
-        .axis line{
+        .y axis path,
+        .y axis line{
             fill: none;
-            stroke-width: 1px;
+            stroke-width: 1.5px;
+            stroke: black;
+        }
+        .x axis path,
+        .x axis line{
+            fill: none;
+            stroke-width: 1.5px;
             stroke: black;
         }
 
@@ -45,6 +51,7 @@
 
         .bubble:hover text{
             opacity: 1;
+            background-color: mediumvioletred;
         }
 
         .bubble:hover circle{
@@ -73,114 +80,81 @@
         }
 
         #menu {
-            margin-top: 15px;
+            margin-top: 0px;
             flex: 2 1 auto;
             background-color: #a0a0a0;
             width: 300px;
         }
         #menu1, #menu2, #menu3, #menu4 {
-            height: 200px;
+            height: 185px;
             width: 100%;
             flex: 1 auto;
+            margin: 0;
+            padding: 0;
+        }
+        #menu4 {
+            height: 187px;
+        }
+        #space {
+            width: 100%;
+            height: 20px;
+            white-space:nowrap;
+            background-color: white;
+        }
+        #space2 {
+            width: 100%;
+            height: 20px;
+            background-color: #a0a0a0;
         }
         h1{
             font-size: 14px;
-            padding: 40px 10px 0px 10px;
+            padding: 10px 10px 0px 10px;
             margin: 0px;
             font-weight: bolder;
+            text-align: center;
         }
         h2{
             position: fixed;
         }
 
         #container {
-            margin-top: 15px;
             flex: 2 1 auto;
             overflow-x: scroll;
+            overflow-y: hidden;
         }
 
         #yearBar {
-            overflow: hidden;
-            margin-top: 20px;
+            margin-top: 0px;
             font-family: 'Quicksand', sans-serif;
             color: black;
             font-weight: bolder;
             height: 20px;
             width: 193%;
-            white-space: nowrap;
             background-color: #a0a0a0;
+            border-bottom: 1px solid black;
+            overflow: scroll;
         }
-        #yearLabel1 {
+        .yearLabel {
             float: left;
             font-size: 14px;
-            width: 33px;
+            width: 151px;
             text-align: center;
-            height: 20px;
+            height: 19px;
         }
-        .yearLabel2 {
-            float: left;
-            font-size: 14px;
-            width: 150px;
-            text-align: center;
-            height: 20px;
-        }
-        #row1 {
+        #row1, #row2, #row3, #row4 {
             width: 100%;
-            height: 200px;
+            height: 185px;
             white-space:nowrap;
         }
-        #row2 {
+
+        #spaceForScroll {
             width: 100%;
-            height: 200px;
+            height: 15px;
             white-space:nowrap;
-        }
-        #row3 {
-            width: 100%;
-            height: 200px;
-            white-space:nowrap;
-        }
-        #row4 {
-              width: 100%;
-              height: 200px;
-              white-space:nowrap;
+            background-color: white;
         }
 
-        /* Header bar links */
-        .HeaderBar a {
-            font-family: 'Handlee', cursive;
-            justify-content: center;
-            color: black;
-            text-decoration: none;
-            font-size: 16px;
-            padding: 0px 15px 0px 15px;
-        }
-
-        /* Underline the active page's header link */
-        .HeaderBar a.active {
-            position: relative;
-            border-bottom: 3px solid white;
-        }
-
-        /* Background/spacing of header bar*/
-        .HeaderBar {
-            height: 25px;
-            position: fixed;
-            overflow: hidden;
-            background-color: #E8B9D0;
-            justify-content: space-between;
-            width: 100%;
-            padding: 5px;
-
-        }
-        a:hover {
-            color: black;
-            text-shadow:
-                    -1px -1px 0 #FFF,
-                    1px -1px 0 #FFF,
-                    -1px 1px 0 #FFF,
-                    1px 1px 0 #FFF;
-        }
-        @media screen and (max-width: 1000px) {
+        @media screen and (max-width: 1300px) {
             h1 {
                 font-size: 12px;
             }
@@ -193,17 +167,12 @@
     <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
 
 </head>
-<div class="headerContainer">
-    <div class="HeaderBar">
-        <a class="active" href="index.html">Variation A</a>
-        <a href="index v2.html">Variation B</a>
-        <a href="index v3.html">Variation C</a>
-    </div>
-</div>
-
         <div id="menu">
+            <div id="space2">
+
+            </div>
             <div id="menu1">
-                <h1 style="padding-top: 60px;">Physician Density</h1>
+                <h1>Physician Density</h1>
                 <ul class="legend">
                     <li><span class="a" style="background-color: #022f77;"></span>5.2 +</li>
                     <li><span class="b" style="background-color: #3f7ee2;"></span>2.6 - 5.1</li>
@@ -235,27 +204,29 @@
                     <li><span class="d" style="background-color: #FF9FC4;"></span>NULL</li>
                 </ul>
             </div>
+            <div id="space">
+
+            </div>
         </div>
 
         <div id="container">
             <div id="yearBar">
-                <div id="yearLabel1"></div>
-                <div class="yearLabel2">2000</div>
-                <div class="yearLabel2">2001</div>
-                <div class="yearLabel2">2002</div>
-                <div class="yearLabel2">2003</div>
-                <div class="yearLabel2">2004</div>
-                <div class="yearLabel2">2005</div>
-                <div class="yearLabel2">2006</div>
-                <div class="yearLabel2">2007</div>
-                <div class="yearLabel2">2008</div>
-                <div class="yearLabel2">2009</div>
-                <div class="yearLabel2">2010</div>
-                <div class="yearLabel2">2011</div>
-                <div class="yearLabel2">2012</div>
-                <div class="yearLabel2">2013</div>
-                <div class="yearLabel2">2014</div>
-                <div class="yearLabel2">2015</div>
+                <div class="yearLabel">2000</div>
+                <div class="yearLabel">2001</div>
+                <div class="yearLabel">2002</div>
+                <div class="yearLabel">2003</div>
+                <div class="yearLabel">2004</div>
+                <div class="yearLabel">2005</div>
+                <div class="yearLabel">2006</div>
+                <div class="yearLabel">2007</div>
+                <div class="yearLabel">2008</div>
+                <div class="yearLabel">2009</div>
+                <div class="yearLabel">2010</div>
+                <div class="yearLabel">2011</div>
+                <div class="yearLabel">2012</div>
+                <div class="yearLabel">2013</div>
+                <div class="yearLabel">2014</div>
+                <div class="yearLabel">2015</div>
             </div>
             <div id="row1">
 
@@ -269,15 +240,16 @@
             <div id="row4">
 
             </div>
+            <div id="spaceForScroll">
+
+            </div>
         </div>
 </body>
 <script type="text/javascript">
+    var e = d3.select("html");
+    var numClicks = 0;
 
     window.onload = function() {
-        var margin;
-        var width;
-        var height;
-        var currYear;
 
         for (var i=2000; i<=2015; i++) {
             setupVis1(30, 20, 10, i);
@@ -297,35 +269,33 @@
     }
 
     function setupVis1(margin, width, height, currYear) {
-        if (currYear === 2000) {
-            margin = {top: 25, right: 0, bottom: 5, left: 45};
-            width = 180 - margin.left - margin.right;
-
-        }
-        else {
-            margin = {top: 25, right: 0, bottom: 5, left: 3};
-            width = 150 - margin.left - margin.right;
-        }
-        height = 200 - margin.top - margin.bottom;
+        margin = {top: -5, right: -4, bottom: 10, left: 5};
+        width = 150;
+        height = 185;
 
         var svg = d3.select('#row1')
             .append('svg')
             .attr('width', width + margin.left + margin.right)
             .attr('height', height + margin.top + margin.bottom)
+            .attr("shape-rendering", "geometric-precision")
             .append('g')
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
 
         // Scales
         var xScale = d3.scaleLinear()
-            .range([0, width]);
+            .range([0, width])
+            .clamp(true);
+
 
         var yScale = d3.scaleLinear()
             .range([height, 0]);
 
         // Changes the size of the points
         var radius = d3.scaleSqrt()
-            .range([3, 3]);
+            .range([3.5, 3.5]);
+
+
         // Axes
         var xAxis = d3.axisBottom()
             .scale(xScale)
@@ -335,7 +305,7 @@
         if (currYear === 2000) {
             var yAxis = d3.axisLeft()
                 .scale(yScale)
-                .ticks(12)
+                .ticks(0)
                 .tickSizeOuter(0);
         }
         else {
@@ -358,22 +328,22 @@
             })).nice();
 
             yScale.domain(d3.extent(data, function (d) {
-                return d.LifeExpectancy;
+                return d.LifeExpectancy + 2;
             })).nice();
 
             radius.domain(d3.extent(data, function (d) {
                 return d.PhysicianDensity;
             })).nice();
-            
+
 
             var xAxisElements = svg.append('g')
-                .attr('transform', 'translate(0,' + height + ')')
+                .attr('transform', 'translate(-5,190)')
                 .attr('class', 'x axis')
                 .call(xAxis);
             xAxisElements.selectAll("text").remove();
 
             var yAxisElements = svg.append('g')
-                .attr('transform', 'translate(0,0)')
+                .attr('transform', 'translate(-5,5)')
                 .attr('class', 'y axis')
                 .call(yAxis);
             if (currYear != 2000) {
@@ -382,11 +352,13 @@
 
             var bubble = svg.selectAll('.bubble')
                 .data(data)
+                .datum({isClicked: false})
                 .enter().append('circle')
                 .filter(function (d) {
                     return d.Year == currYear;
                 })
                 .attr('class', 'bubble')
+                .classed('physician', 'physician')
                 .attr('cx', function (d) {
                     return xScale (Math.random() * 7);
                 })
@@ -396,8 +368,17 @@
                 .attr('r', function (d) {
                     return radius(d.PhysicianDensity);
                 })
+                .on("mouseover", function(d) {
+                    onMouseOver(d);
+                })
+                .on("mouseout", function(d) {
+                    onMouseOut(d);
+                })
+                .on("click", function(d) {
+                    onClick(d);
+                })
                 .style('fill', function (d) {
-                    if (d.PhysicianDensity == 0 || d.LifeExpectancy == 0) {
+                    if (d.PhysicianDensity == 0) {
                         return "#c6dcff";
                     } else if (d.PhysicianDensity >= 5.2) {
                         return "#022f77";
@@ -409,34 +390,17 @@
                 });
 
             bubble.append('title')
-                .attr('x', function (d) {
-                    return radius(d.PhysicianDensity);
-                })
                 .text(function (d) {
                     return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["PhysicianDensity"]);
                 });
-            // d3 has a filter function similar to filter function in JS. Here it is used to filter d3 components.
-            bubble.on('click', function (type) {
-                d3.selectAll('.bubble')
-                    .style('opacity', 0.15)
-                    .filter(function (d) {
-                        return d.Country == type;
-                    })
-                    .style('opacity', 1);
-            })
+
         })
+
     }
     function setupVis2(margin, width, height, currYear) {
-        if (currYear === 2000) {
-            margin = {top: 5, right: 0, bottom: 5, left: 45};
-            width = 180 - margin.left - margin.right;
-        }
-        else {
-            margin = {top: 5, right: 0, bottom: 5, left: 3};
-            width = 150 - margin.left - margin.right;
-        }
-        height = 200 - margin.top - margin.bottom;
-
+        margin = {top: -5, right: -4, bottom: 10, left: 5};
+        width = 150;
+        height = 185;
         var svg = d3.select('#row2')
             .append('svg')
             .attr('width', width + margin.left + margin.right)
@@ -452,7 +416,7 @@
             .range([height, 0]);
 
         var radius = d3.scaleSqrt()
-            .range([3, 3]);
+            .range([3.5, 3.5]);
         var xAxis = d3.axisBottom()
             .scale(xScale)
             .ticks(0)
@@ -461,7 +425,7 @@
         if (currYear === 2000) {
             var yAxis = d3.axisLeft()
                 .scale(yScale)
-                .ticks(12)
+                .ticks(0)
                 .tickSizeOuter(0);
         }
         else {
@@ -484,7 +448,7 @@
             })).nice();
 
             yScale.domain(d3.extent(data, function (d) {
-                return d.LifeExpectancy;
+                return d.LifeExpectancy + 2;
             })).nice();
 
             radius.domain(d3.extent(data, function (d) {
@@ -492,13 +456,13 @@
             })).nice();
 
             var xAxisElements = svg.append('g')
-                .attr('transform', 'translate(0,' + height + ')')
+                .attr('transform', 'translate(-5,190)')
                 .attr('class', 'x axis')
                 .call(xAxis);
             xAxisElements.selectAll("text").remove();
-            // y-axis is translated to (0,0)
+
             var yAxisElements = svg.append('g')
-                .attr('transform', 'translate(0,0)')
+                .attr('transform', 'translate(-5,5)')
                 .attr('class', 'y axis')
                 .call(yAxis);
             if (currYear != 2000) {
@@ -507,11 +471,13 @@
 
             var bubble = svg.selectAll('.bubble')
                 .data(data)
+                .datum({isClicked: false})
                 .enter().append('circle')
                 .filter(function (d) {
                     return d.Year == currYear;
                 })
                 .attr('class', 'bubble')
+                .classed('nurse', 'nurse')
                 .attr('cx', function (d) {
                     return xScale (Math.random() * 30);
                 })
@@ -521,8 +487,17 @@
                 .attr('r', function (d) {
                     return radius(d.NursingMidwiferyDensity);
                 })
+                .on("mouseover", function(d) {
+                    onMouseOver(d);
+                })
+                .on("mouseout", function(d) {
+                    onMouseOut(d);
+                })
+                .on("click", function(d) {
+                    onClick(d);
+                })
                 .style('fill', function (d) {
-                    if (d.NursingMidwiferyDensity == 0 || d.LifeExpectancy == 0) {
+                    if (d.NursingMidwiferyDensity == 0) {
                         return "#EBDEF9";
                     } else if (d.NursingMidwiferyDensity >= 20) {
                         return "#541087";
@@ -533,35 +508,16 @@
                     }
                 });
             bubble.append('title')
-                .attr('x', function (d) {
-                    return radius(d.NursingMidwiferyDensity);
-                })
                 .text(function (d) {
-                    return ("Country: " + d["Country"] + " Year:  " + d["Year"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["NursingMidwiferyDensity"]);
+                    return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["NursingMidwiferyDensity"]);
                 });
-            // d3 has a filter function similar to filter function in JS. Here it is used to filter d3 components.
-            bubble.on('click', function (type) {
-                d3.selectAll('.bubble')
-                    .style('opacity', 0.15)
-                    .filter(function (d) {
-                        return d.Country == type;
-                    })
-                    .style('opacity', 1);
-            })
         })
     }
 
     function setupVis3(margin, width, height, currYear) {
-        if (currYear === 2000) {
-            margin = {top: 5, right: 0, bottom: 5, left: 45};
-            width = 180 - margin.left - margin.right;
-        }
-        else {
-            margin = {top: 5, right: 0, bottom: 5, left: 3};
-            width = 150 - margin.left - margin.right;
-        }
-        height = 200 - margin.top - margin.bottom;
-
+        margin = {top: -5, right: -4, bottom: 10, left: 5};
+        width = 150;
+        height = 185;
         var svg = d3.select('#row3')
             .append('svg')
             .attr('width', width + margin.left + margin.right)
@@ -577,7 +533,7 @@
             .range([height, 0]);
 
         var radius = d3.scaleSqrt()
-            .range([3, 3]);
+            .range([3.5, 3.5]);
         var xAxis = d3.axisBottom()
             .scale(xScale)
             .ticks(0)
@@ -586,7 +542,7 @@
         if (currYear === 2000) {
             var yAxis = d3.axisLeft()
                 .scale(yScale)
-                .ticks(12)
+                .ticks(0)
                 .tickSizeOuter(0);
         }
         else {
@@ -609,7 +565,7 @@
             })).nice();
 
             yScale.domain(d3.extent(data, function (d) {
-                return d.LifeExpectancy;
+                return d.LifeExpectancy + 2;
             })).nice();
 
             radius.domain(d3.extent(data, function (d) {
@@ -617,14 +573,13 @@
             })).nice();
 
             var xAxisElements = svg.append('g')
-                .attr('transform', 'translate(0,' + height + ')')
+                .attr('transform', 'translate(-5,190)')
                 .attr('class', 'x axis')
                 .call(xAxis);
             xAxisElements.selectAll("text").remove();
 
-
             var yAxisElements = svg.append('g')
-                .attr('transform', 'translate(0,0)')
+                .attr('transform', 'translate(-5,5)')
                 .attr('class', 'y axis')
                 .call(yAxis);
             if (currYear != 2000) {
@@ -633,11 +588,13 @@
 
             var bubble = svg.selectAll('.bubble')
                 .data(data)
+                .datum({isClicked: false})
                 .enter().append('circle')
                 .filter(function (d) {
                     return d.Year == currYear;
                 })
                 .attr('class', 'bubble')
+                .classed('dentist', 'dentist')
                 .attr('cx', function (d) {
                     return xScale (Math.random() * 2.3);
                 })
@@ -647,8 +604,17 @@
                 .attr('r', function (d) {
                     return radius(d.DentistryDensity);
                 })
+                .on("mouseover", function(d) {
+                    onMouseOver(d);
+                })
+                .on("mouseout", function(d) {
+                    onMouseOut(d);
+                })
+                .on("click", function(d) {
+                    onClick(d);
+                })
                 .style('fill', function (d) {
-                    if (d.DentistryDensity == 0 || d.LifeExpectancy == 0) {
+                    if (d.DentistryDensity == 0) {
                         return "#DDFFAD";
                     } else if (d.DentistryDensity >= 1.6) {
                         return "#35491F";
@@ -660,37 +626,16 @@
                 });
 
             bubble.append('title')
-                .attr('x', function (d) {
-                    return radius(d.DentistryDensity);
-                })
                 .text(function (d) {
-                    return ("Country: " + d["Country"] + " Year:  " + d["Year"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["DentistryDensity"]);
+                    return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["DentistryDensity"]);
                 });
-
-            bubble.on('click', function (type) {
-                d3.selectAll('.bubble')
-                    .style('opacity', 0.15)
-                    .filter(function (d) {
-                        return d.Country == type;
-                    })
-                    .style('opacity', 1);
-            })
         })
     }
 
     function setupVis4(margin, width, height, currYear) {
-        if (currYear === 2000) {
-            margin = {top: 5, right: 0, bottom: 5, left: 45};
-            width = 180 - margin.left - margin.right;
-
-        }
-        else {
-            margin = {top: 5, right: 0, bottom: 5, left: 3};
-            width = 150 - margin.left - margin.right;
-
-        }
-        height = 200 - margin.top - margin.bottom;
-
+        margin = {top: -5, right: -4, bottom: 10, left: 5};
+        width = 150;
+        height = 185;
         var svg = d3.select('#row4')
             .append('svg')
             .attr('width', width + margin.left + margin.right)
@@ -706,7 +651,7 @@
             .range([height, 0]);
 
         var radius = d3.scaleSqrt()
-            .range([3, 3]);
+            .range([3.5, 3.5]);
         var xAxis = d3.axisBottom()
             .scale(xScale)
             .ticks(0)
@@ -715,7 +660,7 @@
         if (currYear === 2000) {
             var yAxis = d3.axisLeft()
                 .scale(yScale)
-                .ticks(12)
+                .ticks(0)
                 .tickSizeOuter(0);
         }
         else {
@@ -739,7 +684,7 @@
             })).nice();
 
             yScale.domain(d3.extent(data, function (d) {
-                return d.LifeExpectancy;
+                return d.LifeExpectancy +2;
             })).nice();
 
             radius.domain(d3.extent(data, function (d) {
@@ -747,13 +692,13 @@
             })).nice();
 
             var xAxisElements = svg.append('g')
-                .attr('transform', 'translate(0,' + height + ')')
+                .attr('transform', 'translate(-5,190)')
                 .attr('class', 'x axis')
                 .call(xAxis);
             xAxisElements.selectAll("text").remove();
 
             var yAxisElements = svg.append('g')
-                .attr('transform', 'translate(0,0)')
+                .attr('transform', 'translate(-5,5)')
                 .attr('class', 'y axis')
                 .call(yAxis);
             if (currYear != 2000) {
@@ -762,11 +707,13 @@
 
             var bubble = svg.selectAll('.bubble')
                 .data(data)
+                .datum({isClicked: false})
                 .enter().append('circle')
                 .filter(function (d) {
                     return d.Year == currYear;
                 })
                 .attr('class', 'bubble')
+                .classed('pharmacist', 'pharmacist')
                 .attr('cx', function (d) {
                     return xScale (Math.random() * 2.5);
                 })
@@ -776,8 +723,17 @@
                 .attr('r', function (d) {
                     return radius(d.PharmaceuticalDensity);
                 })
+                .on("mouseover", function(d) {
+                    onMouseOver(d);
+                })
+                .on("mouseout", function(d) {
+                    onMouseOut(d);
+                })
+                .on("click", function(d) {
+                    onClick(d);
+                })
                 .style('fill', function (d) {
-                    if (d.PharmaceuticalDensity == 0 || d.LifeExpectancy == 0) {
+                    if (d.PharmaceuticalDensity == 0) {
                         return "#FF9FC4";
                     } else if (d.PharmaceuticalDensity >= 1.7) {
                         return "#7F0506";
@@ -788,24 +744,266 @@
                     }
                 });
             bubble.append('title')
-                .attr('x', function (d) {
-                    return radius(d.PharmaceuticalDensity);
-                })
                 .text(function (d) {
-                    return ("Country: " + d["Country"] + " Year:  " + d["Year"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["PharmaceuticalDensity"]);
+                    return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["PharmaceuticalDensity"]);
                 });
-
-            // d3 has a filter function similar to filter function in JS. Here it is used to filter d3 components.
-            bubble.on('click', function (type) {
-                d3.selectAll('.bubble')
-                    .style('opacity', 0.15)
-                    .filter(function (d) {
-                        return d.Country == type;
-                    })
-                    .style('opacity', 1);
-            })
         })
+
     }
+    function onMouseOver(data){
+        e.selectAll(".pharmacist")
+            .select(function (d) {
+                return d["Country"] === data["Country"] ? this : null
+            })
+            .style('stroke', function (d) {
+                if (d.PharmaceuticalDensity == 0) {
+                    return "#FF9FC4";
+                } else if (d.PharmaceuticalDensity >= 1.7) {
+                    return "#7F0506";
+                } else if (d.PharmaceuticalDensity >= 0.9 && d.PharmaceuticalDensity < 1.7) {
+                    return "#A80951";
+                } else if (d.PharmaceuticalDensity > 0 && d.PharmaceuticalDensity < 0.9) {
+                    return "#D90081";
+                }
+            })
+            .style('stroke-width', 1.5)
+            .style("fill", "white")
+            .attr("r", 5.0)
+
+
+        e.selectAll(".dentist")
+            .select(function (d) {
+                return d["Country"] === data["Country"] ? this : null
+            })
+            .style('stroke', function (d) {
+                if (d.DentistryDensity == 0) {
+                    return "#DDFFAD";
+                } else if (d.DentistryDensity >= 1.6) {
+                    return "#35491F";
+                } else if (d.DentistryDensity >= 0.8 && d.DentistryDensity < 1.6) {
+                    return "#759046";
+                } else if (d.DentistryDensity > 0 && d.DentistryDensity < 0.8) {
+                    return "#A7C96A";
+                }
+            })
+            .style('stroke-width', 1.5)
+            .style("fill", "white")
+            .attr("r", 5.0)
+
+        e.selectAll(".nurse")
+            .select(function (d) {
+                return d["Country"] === data["Country"] ? this : null
+            })
+            .style('stroke', function (d) {
+                if (d.NursingMidwiferyDensity == 0) {
+                    return "#EBDEF9";
+                } else if (d.NursingMidwiferyDensity >= 20) {
+                    return "#541087";
+                } else if (d.NursingMidwiferyDensity >= 10 && d.NursingMidwiferyDensity < 20) {
+                    return "#9A7DC6";
+                } else if (d.NursingMidwiferyDensity > 0 && d.NursingMidwiferyDensity < 10) {
+                    return "#CDAEFF";
+                }
+            })
+            .style('stroke-width', 1.5)
+            .style("fill", "white")
+            .attr("r", 5.0)
+
+        e.selectAll(".physician")
+            .select(function (d) {
+                return d["Country"] === data["Country"] ? this : null
+            })
+            .style('stroke', function (d) {
+                if (d.PhysicianDensity == 0) {
+                    return "#c6dcff";
+                } else if (d.PhysicianDensity >= 5.2) {
+                    return "#022f77";
+                } else if (d.PhysicianDensity >= 2.6 && d.PhysicianDensity < 5.2) {
+                    return "#3f7ee2";
+                } else if (d.PhysicianDensity > 0 && d.PhysicianDensity < 2.6) {
+                    return "#76a5f2";
+                }
+            })
+            .style('stroke-width', 1.5)
+            .style("fill", "white")
+            .attr("r", 5.0)
+    }
+
+    function onMouseOut(data) {
+        if (data.isClicked) {
+            e.selectAll(".pharmacist")
+                .select(function (d) {
+                    return d["Country"] === data["Country"] ? this : null
+                })
+                .style('stroke', function (d) {
+                    if (d.PharmaceuticalDensity == 0) {
+                        return "#FF9FC4";
+                    } else if (d.PharmaceuticalDensity >= 1.7) {
+                        return "#7F0506";
+                    } else if (d.PharmaceuticalDensity >= 0.9 && d.PharmaceuticalDensity < 1.7) {
+                        return "#A80951";
+                    } else if (d.PharmaceuticalDensity > 0 && d.PharmaceuticalDensity < 0.9) {
+                        return "#D90081";
+                    }
+                })
+                .style('stroke-width', 1.5)
+                .style("fill", "white")
+                .attr("r", 5.0)
+
+
+            e.selectAll(".dentist")
+                .select(function (d) {
+                    return d["Country"] === data["Country"] ? this : null
+                })
+                .style('stroke', function (d) {
+                    if (d.DentistryDensity == 0) {
+                        return "#DDFFAD";
+                    } else if (d.DentistryDensity >= 1.6) {
+                        return "#35491F";
+                    } else if (d.DentistryDensity >= 0.8 && d.DentistryDensity < 1.6) {
+                        return "#759046";
+                    } else if (d.DentistryDensity > 0 && d.DentistryDensity < 0.8) {
+                        return "#A7C96A";
+                    }
+                })
+                .style('stroke-width', 1.5)
+                .style("fill", "white")
+                .attr("r", 5.0)
+
+            e.selectAll(".nurse")
+                .select(function (d) {
+                    return d["Country"] === data["Country"] ? this : null
+                })
+                .style('stroke', function (d) {
+                    if (d.NursingMidwiferyDensity == 0) {
+                        return "#EBDEF9";
+                    } else if (d.NursingMidwiferyDensity >= 20) {
+                        return "#541087";
+                    } else if (d.NursingMidwiferyDensity >= 10 && d.NursingMidwiferyDensity < 20) {
+                        return "#9A7DC6";
+                    } else if (d.NursingMidwiferyDensity > 0 && d.NursingMidwiferyDensity < 10) {
+                        return "#CDAEFF";
+                    }
+                })
+                .style('stroke-width', 1.5)
+                .style("fill", "white")
+                .attr("r", 5.0)
+
+            e.selectAll(".physician")
+                .select(function (d) {
+                    return d["Country"] === data["Country"] ? this : null
+                })
+                .style('stroke', function (d) {
+                    if (d.PhysicianDensity == 0) {
+                        return "#c6dcff";
+                    } else if (d.PhysicianDensity >= 5.2) {
+                        return "#022f77";
+                    } else if (d.PhysicianDensity >= 2.6 && d.PhysicianDensity < 5.2) {
+                        return "#3f7ee2";
+                    } else if (d.PhysicianDensity > 0 && d.PhysicianDensity < 2.6) {
+                        return "#76a5f2";
+                    }
+                })
+                .style('stroke-width', 1.5)
+                .style("fill", "white")
+                .attr("r", 5.0)
+        }
+        if (!data.isClicked) {
+            e.selectAll(".pharmacist")
+                .select(function (d) {
+                    return !d.isClicked ? this : null
+                })
+                .style('fill', function (d) {
+                    if (d.PharmaceuticalDensity == 0) {
+                        return "#FF9FC4";
+                    } else if (d.PharmaceuticalDensity >= 1.7) {
+                        return "#7F0506";
+                    } else if (d.PharmaceuticalDensity >= 0.9 && d.PharmaceuticalDensity < 1.7) {
+                        return "#A80951";
+                    } else if (d.PharmaceuticalDensity > 0 && d.PharmaceuticalDensity < 0.9) {
+                        return "#D90081";
+                    }
+                })
+                .style('stroke-width', 0)
+                .attr("r", 3.5)
+
+
+            e.selectAll(".dentist")
+                .select(function (d) {
+                    return !d.isClicked ? this : null
+                })
+                .style('fill', function (d) {
+                    if (d.DentistryDensity == 0) {
+                        return "#DDFFAD";
+                    } else if (d.DentistryDensity >= 1.6) {
+                        return "#35491F";
+                    } else if (d.DentistryDensity >= 0.8 && d.DentistryDensity < 1.6) {
+                        return "#759046";
+                    } else if (d.DentistryDensity > 0 && d.DentistryDensity < 0.8) {
+                        return "#A7C96A";
+                    }
+                })
+                .style('stroke-width', 0)
+                .attr("r", 3.5)
+
+            e.selectAll(".nurse")
+                .select(function (d) {
+                    return !d.isClicked ? this : null
+                })
+                .style('fill', function (d) {
+                    if (d.NursingMidwiferyDensity == 0) {
+                        return "#EBDEF9";
+                    } else if (d.NursingMidwiferyDensity >= 20) {
+                        return "#541087";
+                    } else if (d.NursingMidwiferyDensity >= 10 && d.NursingMidwiferyDensity < 20) {
+                        return "#9A7DC6";
+                    } else if (d.NursingMidwiferyDensity > 0 && d.NursingMidwiferyDensity < 10) {
+                        return "#CDAEFF";
+                    }
+                })
+                .style('stroke-width', 0)
+                .attr("r", 3.5)
+
+            e.selectAll(".physician")
+                .select(function (d) {
+                    return !d.isClicked ? this : null
+                })
+                .style('fill', function (d) {
+                    if (d.PhysicianDensity == 0) {
+                        return "#c6dcff";
+                    } else if (d.PhysicianDensity >= 5.2) {
+                        return "#022f77";
+                    } else if (d.PhysicianDensity >= 2.6 && d.PhysicianDensity < 5.2) {
+                        return "#3f7ee2";
+                    } else if (d.PhysicianDensity > 0 && d.PhysicianDensity < 2.6) {
+                        return "#76a5f2";
+                    }
+                })
+                .style('stroke-width', 0)
+                .attr("r", 3.5)
+        }
+    }
+    function onClick(data) {
+        data.isClicked = !data.isClicked;
+
+        e.selectAll(".bubble")
+            .select(function (d) {
+
+                if (d["Country"] === data["Country"]) {
+                    if (data.isClicked) {
+                        d.isClicked = true
+                    }
+                    if (!data.isClicked) {
+                        d.isClicked = false;
+                    }
+                }
+                return d["Country"] === data["Country"] ? this : null
+
+            });
+
+    }
+
+
 </script>
 
 </body>
