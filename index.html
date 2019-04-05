@@ -176,6 +176,10 @@
             line-height: 1;
         }
 
+        input {
+            width: 150px;
+            height: 15px;
+        }
 
         @media screen and (max-width: 1300px) {
             h1 {
@@ -192,9 +196,17 @@
 </head>
     <div class="headerContainer">
         <div class="HeaderBar">
-            <button onclick="buttonClick()">Clear Selection</button>
+            <div class="input-group">
+            <span class="input-group-btn">
+                <input type="text" class="form-control">
+            </span>
+                <button class="btn btn-default" type="button">Go!</button>
+            <span>
+                <button onclick="buttonClick()">Clear Selection</button>
+            </span>
+            </div>
+
         </div>
-            <form></form>
     </div>
         <div id="menu">
             <div id="space2">
