@@ -113,10 +113,6 @@
             font-weight: bolder;
             text-align: center;
         }
-        h2{
-            position: fixed;
-        }
-
         #container {
             flex: 2 1 auto;
             overflow-x: scroll;
@@ -185,6 +181,23 @@
             height: 23px;
             line-height: 1;
             vertical-align: middle;
+            margin-right: 10px;
+        }
+        input:focus {
+            color: black;
+        }
+
+        p{
+            float: left;
+            position:fixed;
+            line-height: 0;
+        }
+        #errorMes {
+            font-size: 15px;
+            color: red;
+            float: right;
+            margin-right: 10px;
+            vertical-align: middle;
         }
 
         @media screen and (max-width: 1300px) {
@@ -202,15 +215,19 @@
 </head>
     <div class="headerContainer">
         <div class="HeaderBar">
+            <p>Density of Healthcare Professionals per Country</p>
             <span>
-                <button onclick="buttonClick()">Clear Selection</button>
+                <button onclick="clearClick()">Clear Selection</button>
             </span>
                 <div class="input-group">
-                    <button class="btn btn-default" type="button">Go!</button>
+                    <button onclick="findClick()" class="btn btn-default" type="button">Find Country</button>
 
                 </div>
             <span class="input-group-btn">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" id="find" onfocus="this.value=''">
+            </span>
+            <span>
+                <h2 id="errorMes"></h2>
             </span>
 
 
@@ -1059,8 +1076,10 @@
             });
 
     }
-    function buttonClick() {
-        console.log("in button click");
+    function clearClick() {
+        document.getElementById('find').value = "";
+
+
         e.selectAll(".pharmacist")
             .style('fill', function (d) {
                 d.isClicked = false;
@@ -1124,6 +1143,112 @@
             })
             .style('stroke-width', 0)
             .attr("r", 3.5)
+    }
+    function findClick() {
+        var str = document.getElementById("find").value;
+        var found = false;
+
+        e.selectAll(".pharmacist")
+            .select(function (d) {
+                if (d["Country"] === str) {
+                    found = true;
+                }
+                return d["Country"] === str ? this : null
+            })
+            .style('stroke', function (d) {
+                d.isClicked = true;
+                if (d.PharmaceuticalDensity == 0) {
+                    return "#FF9FC4";
+                } else if (d.PharmaceuticalDensity >= 1.7) {
+                    return "#7F0506";
+                } else if (d.PharmaceuticalDensity >= 0.9 && d.PharmaceuticalDensity < 1.7) {
+                    return "#A80951";
+                } else if (d.PharmaceuticalDensity > 0 && d.PharmaceuticalDensity < 0.9) {
+                    return "#D90081";
+                }
+            })
+            .transition()
+            .style('stroke-width', 2.5)
+            .style("fill", "white")
+            .attr("r", 5.0)
+
+        e.selectAll(".dentist")
+            .select(function (d) {
+                if (d["Country"] === str) {
+                    found = true;
+                }
+                return d["Country"] === str ? this : null
+            })
+            .style('stroke', function (d) {
+                d.isClicked = true;
+                if (d.DentistryDensity == 0) {
+                    return "#DDFFAD";
+                } else if (d.DentistryDensity >= 1.6) {
+                    return "#35491F";
+                } else if (d.DentistryDensity >= 0.8 && d.DentistryDensity < 1.6) {
+                    return "#759046";
+                } else if (d.DentistryDensity > 0 && d.DentistryDensity < 0.8) {
+                    return "#A7C96A";
+                }
+            })
+            .transition()
+            .style('stroke-width', 2.5)
+            .style("fill", "white")
+            .attr("r", 5.0)
+
+        e.selectAll(".nurse")
+            .select(function (d) {
+                if (d["Country"] === str) {
+                    found = true;
+                }
+                return d["Country"] === str ? this : null
+            })
+            .style('stroke', function (d) {
+                d.isClicked = true;
+                if (d.NursingMidwiferyDensity == 0) {
+                    return "#EBDEF9";
+                } else if (d.NursingMidwiferyDensity >= 20) {
+                    return "#541087";
+                } else if (d.NursingMidwiferyDensity >= 10 && d.NursingMidwiferyDensity < 20) {
+                    return "#9A7DC6";
+                } else if (d.NursingMidwiferyDensity > 0 && d.NursingMidwiferyDensity < 10) {
+                    return "#CDAEFF";
+                }
+            })
+            .transition()
+            .style('stroke-width', 2.5)
+            .style("fill", "white")
+            .attr("r", 5.0)
+
+        e.selectAll(".physician")
+            .select(function (d) {
+                if (d["Country"] === str) {
+                    found = true;
+                }
+                return d["Country"] === str ? this : null
+            })
+            .style('stroke', function (d) {
+                d.isClicked = true;
+                if (d.PhysicianDensity == 0) {
+                    return "#c6dcff";
+                } else if (d.PhysicianDensity >= 5.2) {
+                    return "#022f77";
+                } else if (d.PhysicianDensity >= 2.6 && d.PhysicianDensity < 5.2) {
+                    return "#3f7ee2";
+                } else if (d.PhysicianDensity > 0 && d.PhysicianDensity < 2.6) {
+                    return "#76a5f2";
+                }
+            })
+            .transition()
+            .style('stroke-width', 2.5)
+            .style("fill", "white")
+            .attr("r", 5.0)
+
+        console.log(found);
+        if (found === false) {
+            document.getElementById('errorMes').innerText = str + " Not Found";
+        }
+
     }
 
 
