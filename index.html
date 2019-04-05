@@ -162,7 +162,7 @@
             background-color: #E8B9D0;
             justify-content: space-between;
             width: 100%;
-            padding: 5px;
+            padding: 5px 100px 5px 5px;
         }
         button {
             height: 30px;
@@ -174,11 +174,17 @@
             vertical-align: middle;
             text-align: center;
             line-height: 1;
+            float: right;
+            margin-left: 5px;
+            margin-right: 20px;
         }
 
         input {
             width: 150px;
-            height: 15px;
+            float: right;
+            height: 23px;
+            line-height: 1;
+            vertical-align: middle;
         }
 
         @media screen and (max-width: 1300px) {
@@ -196,15 +202,17 @@
 </head>
     <div class="headerContainer">
         <div class="HeaderBar">
-            <div class="input-group">
-            <span class="input-group-btn">
-                <input type="text" class="form-control">
-            </span>
-                <button class="btn btn-default" type="button">Go!</button>
             <span>
                 <button onclick="buttonClick()">Clear Selection</button>
             </span>
-            </div>
+                <div class="input-group">
+                    <button class="btn btn-default" type="button">Go!</button>
+
+                </div>
+            <span class="input-group-btn">
+                <input type="text" class="form-control">
+            </span>
+
 
         </div>
     </div>
@@ -807,6 +815,7 @@
                     return "#D90081";
                 }
             })
+            .transition()
             .style('stroke-width', 2.5)
             .style("fill", "white")
             .attr("r", 5.0)
@@ -827,6 +836,7 @@
                     return "#A7C96A";
                 }
             })
+            .transition()
             .style('stroke-width', 2.5)
             .style("fill", "white")
             .attr("r", 5.0)
@@ -846,6 +856,7 @@
                     return "#CDAEFF";
                 }
             })
+            .transition()
             .style('stroke-width', 2.5)
             .style("fill", "white")
             .attr("r", 5.0)
@@ -865,6 +876,7 @@
                     return "#76a5f2";
                 }
             })
+            .transition()
             .style('stroke-width', 2.5)
             .style("fill", "white")
             .attr("r", 5.0)
@@ -934,7 +946,7 @@
                 .select(function (d) {
                     return d["Country"] === data["Country"] ? this : null
                 })
-                .style('stroke', function (d) {
+                    .style('stroke', function (d) {
                     if (d.PhysicianDensity == 0) {
                         return "#c6dcff";
                     } else if (d.PhysicianDensity >= 5.2) {
@@ -945,8 +957,8 @@
                         return "#76a5f2";
                     }
                 })
-                .style('stroke-width', 2.5)
                 .style("fill", "white")
+                .style('stroke-width', 2.5)
                 .attr("r", 5.0)
         }
         if (!data.isClicked) {
@@ -954,6 +966,7 @@
                 .select(function (d) {
                     return !d.isClicked ? this : null
                 })
+                .transition()
                 .style('fill', function (d) {
                     if (d.PharmaceuticalDensity == 0) {
                         return "#FF9FC4";
@@ -973,6 +986,7 @@
                 .select(function (d) {
                     return !d.isClicked ? this : null
                 })
+                .transition()
                 .style('fill', function (d) {
                     if (d.DentistryDensity == 0) {
                         return "#DDFFAD";
@@ -991,6 +1005,7 @@
                 .select(function (d) {
                     return !d.isClicked ? this : null
                 })
+                .transition()
                 .style('fill', function (d) {
                     if (d.NursingMidwiferyDensity == 0) {
                         return "#EBDEF9";
@@ -1009,6 +1024,7 @@
                 .select(function (d) {
                     return !d.isClicked ? this : null
                 })
+                .transition()
                 .style('fill', function (d) {
                     if (d.PhysicianDensity == 0) {
                         return "#c6dcff";
