@@ -18,8 +18,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="458">
-              <caret line="1248" column="63" selection-start-line="1248" selection-start-column="63" selection-end-line="1248" selection-end-column="63" />
+            <state relative-caret-position="369">
+              <caret line="1147" column="21" selection-start-line="1147" selection-start-column="21" selection-end-line="1147" selection-end-column="21" />
               <folding>
                 <element signature="n#style#0;n#h1#0;n#div#1;n#div#1;n#body#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#span#0;n#li#0;n#ul#0;n#div#0;n#div#1;n#body#0;n#!!top" expanded="true" />
@@ -71,7 +71,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>gender</find>
       <find>year</find>
       <find>.axis</find>
       <find>svg.append</find>
@@ -101,6 +100,7 @@
       <find>search</find>
       <find>msg</find>
       <find>h2</find>
+      <find>#d13dff</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -199,12 +199,12 @@
       <workItem from="1552939810671" duration="2646000" />
       <workItem from="1553803639931" duration="1883000" />
       <workItem from="1553890058370" duration="485000" />
-      <workItem from="1554088876256" duration="48681000" />
+      <workItem from="1554088876256" duration="52245000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="113069000" />
+    <option name="totallyTimeSpent" value="116633000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="140" y="23" width="1172" height="850" extended-state="0" />
@@ -323,8 +323,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="1248" column="63" selection-start-line="1248" selection-start-column="63" selection-end-line="1248" selection-end-column="63" />
+        <state relative-caret-position="369">
+          <caret line="1147" column="21" selection-start-line="1147" selection-start-column="21" selection-end-line="1147" selection-end-column="21" />
           <folding>
             <element signature="n#style#0;n#h1#0;n#div#1;n#div#1;n#body#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#0;n#li#0;n#ul#0;n#div#0;n#div#1;n#body#0;n#!!top" expanded="true" />

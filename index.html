@@ -193,11 +193,11 @@
             line-height: 0;
         }
         #errorMes {
-            font-size: 15px;
+            font-size: 14px;
             color: red;
             float: right;
             margin-right: 10px;
-            vertical-align: middle;
+            line-height: 0.3;
         }
 
         @media screen and (max-width: 1300px) {
@@ -224,7 +224,7 @@
 
                 </div>
             <span class="input-group-btn">
-                <input type="text" class="form-control" id="find" onfocus="this.value=''">
+                <input type="text" class="form-control" id="find" onfocus="clearFind()">
             </span>
             <span>
                 <h2 id="errorMes"></h2>
@@ -821,7 +821,7 @@
             .select(function (d) {
                 return d["Country"] === data["Country"] ? this : null
             })
-            .style('stroke', function (d) {
+                .style('stroke', function (d) {
                 if (d.PharmaceuticalDensity == 0) {
                     return "#FF9FC4";
                 } else if (d.PharmaceuticalDensity >= 1.7) {
@@ -1073,8 +1073,7 @@
                 }
                 return d["Country"] === data["Country"] ? this : null
 
-            });
-
+            })
     }
     function clearClick() {
         document.getElementById('find').value = "";
@@ -1146,15 +1145,21 @@
     }
     function findClick() {
         var str = document.getElementById("find").value;
+        var og = str;
+        var str = str.toUpperCase();
+
+
         var found = false;
 
         e.selectAll(".pharmacist")
             .select(function (d) {
-                if (d["Country"] === str) {
+                if (d["Country"].toUpperCase() === str) {
                     found = true;
                 }
-                return d["Country"] === str ? this : null
+                return d["Country"].toUpperCase() === str ? this : null
             })
+            .transition()
+            .attr("r", 20.0)
             .style('stroke', function (d) {
                 d.isClicked = true;
                 if (d.PharmaceuticalDensity == 0) {
@@ -1167,6 +1172,7 @@
                     return "#D90081";
                 }
             })
+
             .transition()
             .style('stroke-width', 2.5)
             .style("fill", "white")
@@ -1174,11 +1180,13 @@
 
         e.selectAll(".dentist")
             .select(function (d) {
-                if (d["Country"] === str) {
+                if (d["Country"].toUpperCase() === str) {
                     found = true;
                 }
-                return d["Country"] === str ? this : null
+                return d["Country"].toUpperCase() === str ? this : null
             })
+            .transition()
+            .attr("r", 20.0)
             .style('stroke', function (d) {
                 d.isClicked = true;
                 if (d.DentistryDensity == 0) {
@@ -1198,11 +1206,13 @@
 
         e.selectAll(".nurse")
             .select(function (d) {
-                if (d["Country"] === str) {
+                if (d["Country"].toUpperCase() === str) {
                     found = true;
                 }
-                return d["Country"] === str ? this : null
+                return d["Country"].toUpperCase() === str ? this : null
             })
+            .transition()
+            .attr("r", 20.0)
             .style('stroke', function (d) {
                 d.isClicked = true;
                 if (d.NursingMidwiferyDensity == 0) {
@@ -1222,11 +1232,13 @@
 
         e.selectAll(".physician")
             .select(function (d) {
-                if (d["Country"] === str) {
+                if (d["Country"].toUpperCase() === str) {
                     found = true;
                 }
-                return d["Country"] === str ? this : null
+                return d["Country"].toUpperCase() === str ? this : null
             })
+            .transition()
+            .attr("r", 20.0)
             .style('stroke', function (d) {
                 d.isClicked = true;
                 if (d.PhysicianDensity == 0) {
@@ -1246,11 +1258,16 @@
 
         console.log(found);
         if (found === false) {
-            document.getElementById('errorMes').innerText = str + " Not Found";
+            document.getElementById('errorMes').innerText = "'" + og + "' Not Found";
         }
 
     }
 
+    function clearFind() {
+        document.getElementById('errorMes').innerText = "";
+        document.getElementById('find').value = "";
+
+    }
 
 </script>
 
