@@ -113,7 +113,7 @@
             text-align: center;
         }
         #container {
-            flex: 0 1 auto;
+            flex: 1 1 auto;
             overflow-x: scroll;
             overflow-y: hidden;
         }
@@ -124,10 +124,11 @@
             color: black;
             font-weight: bolder;
             height: 20px;
-            width: 193%;
+            width: 200%;
             background-color: #d8d6d6;
             border-bottom: 1px solid black;
-            overflow: scroll;
+            flex: 0 0 100%;
+            overflow-x: auto;
         }
         .yearLabel {
             float: left;
@@ -135,6 +136,8 @@
             width: 151px;
             text-align: center;
             height: 19px;
+            overflow: scroll;
+            float: left;
         }
         #row1, #row2, #row3, #row4 {
             width: 100%;
@@ -142,7 +145,7 @@
             white-space:nowrap;
             float: right;
         }
-        #axis {
+        .axis {
            width: 20px;
            height: 100%;
            background-color: white;
@@ -226,12 +229,10 @@
             line-height: 0.3;
         }
 
-        @media screen and (max-width: 1300px) {
-            h1 {
-                font-size: 12px;
-            }
-            .legend li {
-                font-size: 10px;
+        @media screen and (max-width: 875px) {
+            p{
+                display: none;
+
             }
         }
 
@@ -324,20 +325,20 @@
                 <div class="yearLabel">2015</div>
             </div>
             <div id="row1">
-                <div id="axis">
+                <div class="axis">
                 </div>
             </div>
             <div id="row2">
-                <div id="axis">
+                <div class="axis">
                 </div>
             </div>
             <div id="row3">
-                <div id="axis">
+                <div class="axis">
                     <h3>Life Expectancy</h3>
                 </div>
             </div>
             <div id="row4">
-                <div id="axis">
+                <div class="axis">
                 </div>
             </div>
             <div id="spaceForScroll">
@@ -370,8 +371,10 @@
 
     function setupVis1(margin, width, height, currYear) {
         margin = {top: -5, right: -4, bottom: 10, left: 5};
+
         width = 150;
         height = 175;
+
 
         var svg = d3.select('#row1')
             .append('svg')
@@ -402,18 +405,12 @@
             .ticks(0)
             .tickSizeOuter(0);
 
-        if (currYear === 2000) {
-            var yAxis = d3.axisLeft()
-                .scale(yScale)
-                .ticks(0)
-                .tickSizeOuter(0);
-        }
-        else {
-            var yAxis = d3.axisLeft()
-                .scale(yScale)
-                .ticks(0)
-                .tickSizeOuter(0);
-        }
+        var yAxis = d3.axisLeft()
+            .scale(yScale)
+            .ticks(0)
+            .tickSizeOuter(0);
+
+
         d3.csv('583 Data Set v2 Project.csv', function (error, data) {
             data.forEach(function (d) {
                 d.PhysicianDensity = +d.PhysicianDensity;
@@ -446,9 +443,6 @@
                 .attr('transform', 'translate(-5,5)')
                 .attr('class', 'y axis')
                 .call(yAxis);
-            if (currYear != 2000) {
-                yAxisElements.selectAll("text").remove();
-            }
 
             var bubble = svg.selectAll('.bubble')
                 .data(data)
