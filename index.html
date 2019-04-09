@@ -8,10 +8,12 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 
     <style type="text/css">
+
         body{
             margin: 0;
             font-family: 'Quicksand', sans-serif;
             display: flex;
+            width: 100%;
         }
 
         .label{
@@ -116,6 +118,12 @@
             flex: 1 1 auto;
             overflow-x: scroll;
             overflow-y: hidden;
+            width: 100%;
+        }
+
+        #wrapper {
+            width: 1100px;
+            height: 110px;
         }
 
         #yearBar {
@@ -124,11 +132,12 @@
             color: black;
             font-weight: bolder;
             height: 20px;
-            width: 200%;
+            width: 2440px;
             background-color: #d8d6d6;
             border-bottom: 1px solid black;
             flex: 0 0 100%;
-            overflow-x: auto;
+            overflow-x: scroll;
+            overflow-y: hidden;
         }
         .yearLabel {
             float: left;
@@ -303,7 +312,7 @@
         </div>
 
         <div id="container">
-
+            <div id="wrapper">
             <div id="yearBar">
                 <div id="space3"></div>
 
@@ -344,6 +353,7 @@
             <div id="spaceForScroll">
 
             </div>
+        </div>
         </div>
 </body>
 <script type="text/javascript">
