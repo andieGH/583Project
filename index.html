@@ -429,10 +429,11 @@
                 d.PharmaceuticalDensity = +d.PharmaceuticalDensity;
                 d.LifeExpectancy = +d.LifeExpectancy;
                 d.GDP = +d.GDP;
+                d.GDPPerCapita = +d.GDPPerCapita;
             });
 
             xScale.domain(d3.extent(data, function (d) {
-                return d.GDP;
+                return d.GDPPerCapita;
             })).nice();
 
             yScale.domain(d3.extent(data, function (d) {
@@ -465,7 +466,7 @@
                 .attr('class', 'bubble')
                 .classed('physician', 'physician')
                 .attr('cx', function (d) {
-                    return xScale (d.GDP);
+                    return xScale (d.GDPPerCapita);
                 })
                 .attr('cy', function (d) {
                     return yScale(d.LifeExpectancy);
@@ -496,7 +497,7 @@
 
             bubble.append('title')
                 .text(function (d) {
-                    return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["PhysicianDensity"] + "GDP: " + d["GDP"]);
+                    return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["PhysicianDensity"] + " " + "GDP Per Capita: " + d["GDPPerCapita"]);
                 });
 
         })
