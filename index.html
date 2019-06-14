@@ -547,10 +547,11 @@
                 d.DentistryDensity = +d.DentistryDensity;
                 d.PharmaceuticalDensity = +d.PharmaceuticalDensity;
                 d.LifeExpectancy = +d.LifeExpectancy;
+                d.GDPPerCapita = +d.GDPPerCapita;
             });
 
             xScale.domain(d3.extent(data, function (d) {
-                return d.NursingMidwiferyDensity;
+                return d.GDPPerCapita;
             })).nice();
 
             yScale.domain(d3.extent(data, function (d) {
@@ -585,7 +586,7 @@
                 .attr('class', 'bubble')
                 .classed('nurse', 'nurse')
                 .attr('cx', function (d) {
-                    return xScale (Math.random() * 30);
+                    return xScale (d.GDPPerCapita);
                 })
                 .attr('cy', function (d) {
                     return yScale(d.LifeExpectancy);
@@ -664,10 +665,11 @@
                 d.DentistryDensity = +d.DentistryDensity;
                 d.PharmaceuticalDensity = +d.PharmaceuticalDensity;
                 d.LifeExpectancy = +d.LifeExpectancy;
+                d.GDPPerCapita = +d.GDPPerCapita;
             });
 
             xScale.domain(d3.extent(data, function (d) {
-                return d.DentistryDensity;
+                return d.GDPPerCapita;
             })).nice();
 
             yScale.domain(d3.extent(data, function (d) {
@@ -702,7 +704,7 @@
                 .attr('class', 'bubble')
                 .classed('dentist', 'dentist')
                 .attr('cx', function (d) {
-                    return xScale (Math.random() * 2.3);
+                    return xScale (d.GDPPerCapita);
                 })
                 .attr('cy', function (d) {
                     return yScale(d.LifeExpectancy);
@@ -783,10 +785,11 @@
                 d.DentistryDensity = +d.DentistryDensity;
                 d.PharmaceuticalDensity = +d.PharmaceuticalDensity;
                 d.LifeExpectancy = +d.LifeExpectancy;
+                d.GDPPerCapita = +d.GDPPerCapita;
             });
 
             xScale.domain(d3.extent(data, function (d) {
-                return d.PharmaceuticalDensity;
+                return d.GDPPerCapita;
             })).nice();
 
             yScale.domain(d3.extent(data, function (d) {
@@ -821,7 +824,7 @@
                 .attr('class', 'bubble')
                 .classed('pharmacist', 'pharmacist')
                 .attr('cx', function (d) {
-                    return xScale (Math.random() * 2.5);
+                    return xScale (d.GDPPerCapita);
                 })
                 .attr('cy', function (d) {
                     return yScale(d.LifeExpectancy);
