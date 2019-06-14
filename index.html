@@ -136,16 +136,16 @@
             background-color: #d8d6d6;
             border-bottom: 1px solid black;
             flex: 0 0 100%;
-            overflow-x: scroll;
+            overflow: hidden;
             overflow-y: hidden;
         }
         .yearLabel {
             float: left;
             font-size: 14px;
-            width: 151px;
+            width: 146px;
             text-align: center;
             height: 19px;
-            overflow: scroll;
+            overflow: hidden;
             float: left;
         }
         #row1, #row2, #row3, #row4 {
@@ -190,7 +190,7 @@
             height: 30px;
             position: fixed;
             overflow: hidden;
-            background-color: #E8B9D0;
+            background-color: #727272;
             justify-content: space-between;
             width: 100%;
             padding: 5px 100px 5px 5px;
@@ -208,12 +208,12 @@
             float: right;
             margin-left: 5px;
             margin-right: 20px;
-            border: 1px solid mediumvioletred;
+            border: 1px solid black;
 
         }
 
         input {
-            border: 1px solid mediumvioletred;
+            border: 1px solid black;
             width: 150px;
             float: right;
             height: 25px;
@@ -382,7 +382,7 @@
     function setupVis1(margin, width, height, currYear) {
         margin = {top: -5, right: -4, bottom: 10, left: 5};
 
-        width = 150;
+        width = 145;
         height = 175;
 
 
@@ -428,10 +428,11 @@
                 d.DentistryDensity = +d.DentistryDensity;
                 d.PharmaceuticalDensity = +d.PharmaceuticalDensity;
                 d.LifeExpectancy = +d.LifeExpectancy;
+                d.GDP = +d.GDP;
             });
 
             xScale.domain(d3.extent(data, function (d) {
-                return d.PhysicianDensity;
+                return d.GDP;
             })).nice();
 
             yScale.domain(d3.extent(data, function (d) {
@@ -464,7 +465,7 @@
                 .attr('class', 'bubble')
                 .classed('physician', 'physician')
                 .attr('cx', function (d) {
-                    return xScale (Math.random() * 7);
+                    return xScale (d.GDP);
                 })
                 .attr('cy', function (d) {
                     return yScale(d.LifeExpectancy);
@@ -495,7 +496,7 @@
 
             bubble.append('title')
                 .text(function (d) {
-                    return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["PhysicianDensity"]);
+                    return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["PhysicianDensity"] + "GDP: " + d["GDP"]);
                 });
 
         })
@@ -503,7 +504,7 @@
     }
     function setupVis2(margin, width, height, currYear) {
         margin = {top: -5, right: -4, bottom: 10, left: 5};
-        width = 150;
+        width = 145;
         height = 175;
         var svg = d3.select('#row2')
             .append('svg')
@@ -620,7 +621,7 @@
 
     function setupVis3(margin, width, height, currYear) {
         margin = {top: -5, right: -4, bottom: 10, left: 5};
-        width = 150;
+        width = 145;
         height = 175;
         var svg = d3.select('#row3')
             .append('svg')
@@ -738,7 +739,7 @@
 
     function setupVis4(margin, width, height, currYear) {
         margin = {top: -5, right: -4, bottom: 10, left: 5};
-        width = 150;
+        width = 145;
         height = 175;
         var svg = d3.select('#row4')
             .append('svg')
