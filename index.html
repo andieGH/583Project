@@ -134,7 +134,7 @@
             height: 20px;
             width: 2440px;
             background-color: #d8d6d6;
-            border-bottom: 1px solid black;
+            /*border-bottom: 1px solid black;*/
             flex: 0 0 100%;
             overflow: hidden;
             overflow-y: hidden;
@@ -142,7 +142,7 @@
         .yearLabel {
             float: left;
             font-size: 14px;
-            width: 146px;
+            width: 145px;
             text-align: center;
             height: 19px;
             overflow: hidden;
@@ -153,15 +153,20 @@
             height: 175px;
             white-space:nowrap;
             float: right;
+            pointer-events: none;
         }
         .axis {
            width: 20px;
            height: 100%;
            background-color: white;
             float: left;
-            border-bottom: 1px solid black;
-            border-left: 1px solid black;
+            /*border-bottom: 1px solid black;*/
+            /*border-left: 1px solid black;*/
 
+        }
+        
+        svg {
+            pointer-events: all;
         }
 
         h3 {
@@ -362,44 +367,54 @@
 
     window.onload = function() {
 
-        for (var i=2000; i<=2015; i++) {
-            setupVis1(30, 20, 10, i);
-        }
+        d3.csv('583 Data Set v2 Project.csv', function (error, data) {
+            data.forEach(function (d) {
+                d.PhysicianDensity = +d.PhysicianDensity;
+                d.NursingMidwiferyDensity = +d.NursingMidwiferyDensity;
+                d.DentistryDensity = +d.DentistryDensity;
+                d.PharmaceuticalDensity = +d.PharmaceuticalDensity;
+                d.LifeExpectancy = +d.LifeExpectancy;
+                d.GDPPerCapita = +d.GDPPerCapita;
+                d.CountryNoWhitespace = d.Country.replace(/[\s\(\)]/g, '-');
+            });
 
-        for (var i=2000; i<=2015; i++) {
-            setupVis2(0, 0, 0, i);
-        }
+        const svg = d3.select('#row1')
+            .append('svg')
+                .attr('width', 16*150)
+                .attr('height', 4*175);
 
-        for (var i=2000; i<=2015; i++) {
-            setupVis3(0, 0, 0, i);
-        }
 
-        for (var i=2000; i<=2015; i++) {
-            setupVis4(0, 0, 0, i);
-        }
+            for (var i = 2000; i <= 2015; i++) {
+                setupVis1(svg, data, i, 0);
+            }
+
+            for (var i = 2000; i <= 2015; i++) {
+                setupVis2(svg, data, i, 1);
+            }
+
+            for (var i = 2000; i <= 2015; i++) {
+                setupVis3(svg, data, i, 2);
+            }
+
+            for (var i = 2000; i <= 2015; i++) {
+                setupVis4(svg, data, i, 3);
+            }
+        });
     }
 
-    function setupVis1(margin, width, height, currYear) {
-        margin = {top: -5, right: -4, bottom: 10, left: 5};
+    function setupVis1(svg, data, currYear, rowIndex) {
+        const width = 145;
+        const height = 175;
+        const margin = {top: rowIndex*height-5, right: -4, bottom: 10, left: (5 + (currYear-2000) * (width))};
 
-        width = 145;
-        height = 175;
-
-
-        var svg = d3.select('#row1')
-            .append('svg')
-            .attr('width', width + margin.left + margin.right)
-            .attr('height', height + margin.top + margin.bottom)
-            .attr("shape-rendering", "geometric-precision")
+        var svg = svg
             .append('g')
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-
 
         // Scales
         var xScale = d3.scaleLinear()
             .range([0, width])
             .clamp(true);
-
 
         var yScale = d3.scaleLinear()
             .range([height, 0]);
@@ -410,110 +425,94 @@
 
 
         // Axes
-        var xAxis = d3.axisBottom()
-            .scale(xScale)
-            .ticks(0)
-            .tickSizeOuter(0);
+        // var xAxis = d3.axisBottom()
+        //     .scale(xScale)
+        //     .ticks(0)
+        //     .tickSizeOuter(0);
+        //
+        // var yAxis = d3.axisLeft()
+        //     .scale(yScale)
+        //     .ticks(0)
+        //     .tickSizeOuter(0);
 
-        var yAxis = d3.axisLeft()
-            .scale(yScale)
-            .ticks(0)
-            .tickSizeOuter(0);
+        xScale.domain(d3.extent(data, function (d) {
+            return d.GDPPerCapita;
+        })).nice();
 
+        yScale.domain(d3.extent(data, function (d) {
+            return d.LifeExpectancy + 2;
+        })).nice();
 
-        d3.csv('583 Data Set v2 Project.csv', function (error, data) {
-            data.forEach(function (d) {
-                d.PhysicianDensity = +d.PhysicianDensity;
-                d.NursingMidwiferyDensity = +d.NursingMidwiferyDensity;
-                d.DentistryDensity = +d.DentistryDensity;
-                d.PharmaceuticalDensity = +d.PharmaceuticalDensity;
-                d.LifeExpectancy = +d.LifeExpectancy;
-                d.GDP = +d.GDP;
-                d.GDPPerCapita = +d.GDPPerCapita;
+        radius.domain(d3.extent(data, function (d) {
+            return d.PhysicianDensity;
+        })).nice();
+
+        // var xAxisElements = svg.append('g')
+        //     .attr('transform', 'translate(-5,180)')
+        //     .attr('class', 'x axis')
+        //     .call(xAxis);
+        // xAxisElements.selectAll("text").remove();
+        //
+        // var yAxisElements = svg.append('g')
+        //     .attr('transform', 'translate(-5,5)')
+        //     .attr('class', 'y axis')
+        //     .call(yAxis);
+
+        let dataFiltered = data.filter(d => d.Year == currYear);
+
+        var bubble = svg.selectAll('.bubble')
+            .data(dataFiltered)
+            .datum({isClicked: false})
+            // .filter(function (d) {
+            //     return d.Year == currYear;
+            // })
+            .enter().append('circle')
+            .attr('class', d => 'bubble country-' + d.CountryNoWhitespace + ' year-'+d.Year)
+            .classed('physician', 'physician')
+            .attr('cx', function (d) {
+                return xScale (d.GDPPerCapita);
+            })
+            .attr('cy', function (d) {
+                return yScale(d.LifeExpectancy);
+            })
+            .attr('r', function (d) {
+                return radius(d.PhysicianDensity);
+            })
+            .on("mouseover", function(d) {
+                onMouseOver(d);
+            })
+            .on("mouseout", function(d) {
+                onMouseOut(d);
+            })
+            .on("click", function(d) {
+                onClick(d);
+            })
+            .style('fill', function (d) {
+                if (d.PhysicianDensity == 0) {
+                    return "#c6dcff";
+                } else if (d.PhysicianDensity >= 5.2) {
+                    return "#022f77";
+                } else if (d.PhysicianDensity >= 2.6 && d.PhysicianDensity < 5.2) {
+                    return "#3f7ee2";
+                } else if (d.PhysicianDensity > 0 && d.PhysicianDensity < 2.6) {
+                    return "#76a5f2";
+                }
             });
 
-            xScale.domain(d3.extent(data, function (d) {
-                return d.GDPPerCapita;
-            })).nice();
-
-            yScale.domain(d3.extent(data, function (d) {
-                return d.LifeExpectancy + 2;
-            })).nice();
-
-            radius.domain(d3.extent(data, function (d) {
-                return d.PhysicianDensity;
-            })).nice();
-
-
-            var xAxisElements = svg.append('g')
-                .attr('transform', 'translate(-5,180)')
-                .attr('class', 'x axis')
-                .call(xAxis);
-            xAxisElements.selectAll("text").remove();
-
-            var yAxisElements = svg.append('g')
-                .attr('transform', 'translate(-5,5)')
-                .attr('class', 'y axis')
-                .call(yAxis);
-
-            var bubble = svg.selectAll('.bubble')
-                .data(data)
-                .datum({isClicked: false})
-                .enter().append('circle')
-                .filter(function (d) {
-                    return d.Year == currYear;
-                })
-                .attr('class', 'bubble')
-                .classed('physician', 'physician')
-                .attr('cx', function (d) {
-                    return xScale (d.GDPPerCapita);
-                })
-                .attr('cy', function (d) {
-                    return yScale(d.LifeExpectancy);
-                })
-                .attr('r', function (d) {
-                    return radius(d.PhysicianDensity);
-                })
-                .on("mouseover", function(d) {
-                    onMouseOver(d);
-                })
-                .on("mouseout", function(d) {
-                    onMouseOut(d);
-                })
-                .on("click", function(d) {
-                    onClick(d);
-                })
-                .style('fill', function (d) {
-                    if (d.PhysicianDensity == 0) {
-                        return "#c6dcff";
-                    } else if (d.PhysicianDensity >= 5.2) {
-                        return "#022f77";
-                    } else if (d.PhysicianDensity >= 2.6 && d.PhysicianDensity < 5.2) {
-                        return "#3f7ee2";
-                    } else if (d.PhysicianDensity > 0 && d.PhysicianDensity < 2.6) {
-                        return "#76a5f2";
-                    }
-                });
-
-            bubble.append('title')
-                .text(function (d) {
-                    return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["PhysicianDensity"] + " " + "GDP Per Capita: " + d["GDPPerCapita"]);
-                });
-
-        })
-
+        bubble.append('title')
+            .text(function (d) {
+                return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["PhysicianDensity"] + " " + "GDP Per Capita: " + d["GDPPerCapita"]);
+            });
     }
-    function setupVis2(margin, width, height, currYear) {
-        margin = {top: -5, right: -4, bottom: 10, left: 5};
-        width = 145;
-        height = 175;
-        var svg = d3.select('#row2')
-            .append('svg')
-            .attr('width', width + margin.left + margin.right)
-            .attr('height', height + margin.top + margin.bottom)
+
+    function setupVis2(svg, data, currYear, rowIndex) {
+        const width = 145;
+        const height = 175;
+        const margin = {top: rowIndex*height-5, right: -4, bottom: 10, left: (5 + (currYear-2000) * (width))};
+
+        var svg = svg
             .append('g')
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-
 
         var xScale = d3.scaleLinear()
             .range([0, width]);
@@ -523,115 +522,104 @@
 
         var radius = d3.scaleSqrt()
             .range([3.5, 3.5]);
-        var xAxis = d3.axisBottom()
-            .scale(xScale)
-            .ticks(0)
-            .tickSizeOuter(0);
+        // var xAxis = d3.axisBottom()
+        //     .scale(xScale)
+        //     .ticks(0)
+        //     .tickSizeOuter(0);
 
-        if (currYear === 2000) {
-            var yAxis = d3.axisLeft()
-                .scale(yScale)
-                .ticks(0)
-                .tickSizeOuter(0);
-        }
-        else {
-            var yAxis = d3.axisLeft()
-                .scale(yScale)
-                .ticks(0)
-                .tickSizeOuter(0);
-        }
-        d3.csv('583 Data Set v2 Project.csv', function (error, data) {
-            data.forEach(function (d) {
-                d.PhysicianDensity = +d.PhysicianDensity;
-                d.NursingMidwiferyDensity = +d.NursingMidwiferyDensity;
-                d.DentistryDensity = +d.DentistryDensity;
-                d.PharmaceuticalDensity = +d.PharmaceuticalDensity;
-                d.LifeExpectancy = +d.LifeExpectancy;
-                d.GDPPerCapita = +d.GDPPerCapita;
+        // if (currYear === 2000) {
+        //     var yAxis = d3.axisLeft()
+        //         .scale(yScale)
+        //         .ticks(0)
+        //         .tickSizeOuter(0);
+        // }
+        // else {
+        //     var yAxis = d3.axisLeft()
+        //         .scale(yScale)
+        //         .ticks(0)
+        //         .tickSizeOuter(0);
+        // }
+
+        xScale.domain(d3.extent(data, function (d) {
+            return d.GDPPerCapita;
+        })).nice();
+
+        yScale.domain(d3.extent(data, function (d) {
+            return d.LifeExpectancy + 2;
+        })).nice();
+
+        radius.domain(d3.extent(data, function (d) {
+            return d.NursingMidwiferyDensity;
+        })).nice();
+
+        // var xAxisElements = svg.append('g')
+        //     .attr('transform', 'translate(-5,180)')
+        //     .attr('class', 'x axis')
+        //     .call(xAxis);
+        // xAxisElements.selectAll("text").remove();
+        //
+        // var yAxisElements = svg.append('g')
+        //     .attr('transform', 'translate(-5,5)')
+        //     .attr('class', 'y axis')
+        //     .call(yAxis);
+        // if (currYear != 2000) {
+        //     yAxisElements.selectAll("text").remove();
+        // }
+
+        let dataFiltered = data.filter(d => d.Year == currYear);
+
+        var bubble = svg.selectAll('.bubble')
+            .data(dataFiltered)
+            .datum({isClicked: false})
+            .enter().append('circle')
+            // .filter(function (d) {
+            //     return d.Year == currYear;
+            // })
+            .attr('class', d => 'bubble country-' + d.CountryNoWhitespace + ' year-'+d.Year)
+            .classed('nurse', 'nurse')
+            .attr('cx', function (d) {
+                return xScale (d.GDPPerCapita);
+            })
+            .attr('cy', function (d) {
+                return yScale(d.LifeExpectancy);
+            })
+            .attr('r', function (d) {
+                return radius(d.NursingMidwiferyDensity);
+            })
+            .on("mouseover", function(d) {
+                onMouseOver(d);
+            })
+            .on("mouseout", function(d) {
+                onMouseOut(d);
+            })
+            .on("click", function(d) {
+                onClick(d);
+            })
+            .style('fill', function (d) {
+                if (d.NursingMidwiferyDensity == 0) {
+                    return "#EBDEF9";
+                } else if (d.NursingMidwiferyDensity >= 20) {
+                    return "#541087";
+                } else if (d.NursingMidwiferyDensity >= 10 && d.NursingMidwiferyDensity < 20) {
+                    return "#9A7DC6";
+                } else if (d.NursingMidwiferyDensity > 0 && d.NursingMidwiferyDensity < 10) {
+                    return "#CDAEFF";
+                }
             });
-
-            xScale.domain(d3.extent(data, function (d) {
-                return d.GDPPerCapita;
-            })).nice();
-
-            yScale.domain(d3.extent(data, function (d) {
-                return d.LifeExpectancy + 2;
-            })).nice();
-
-            radius.domain(d3.extent(data, function (d) {
-                return d.NursingMidwiferyDensity;
-            })).nice();
-
-            var xAxisElements = svg.append('g')
-                .attr('transform', 'translate(-5,180)')
-                .attr('class', 'x axis')
-                .call(xAxis);
-            xAxisElements.selectAll("text").remove();
-
-            var yAxisElements = svg.append('g')
-                .attr('transform', 'translate(-5,5)')
-                .attr('class', 'y axis')
-                .call(yAxis);
-            if (currYear != 2000) {
-                yAxisElements.selectAll("text").remove();
-            }
-
-            var bubble = svg.selectAll('.bubble')
-                .data(data)
-                .datum({isClicked: false})
-                .enter().append('circle')
-                .filter(function (d) {
-                    return d.Year == currYear;
-                })
-                .attr('class', 'bubble')
-                .classed('nurse', 'nurse')
-                .attr('cx', function (d) {
-                    return xScale (d.GDPPerCapita);
-                })
-                .attr('cy', function (d) {
-                    return yScale(d.LifeExpectancy);
-                })
-                .attr('r', function (d) {
-                    return radius(d.NursingMidwiferyDensity);
-                })
-                .on("mouseover", function(d) {
-                    onMouseOver(d);
-                })
-                .on("mouseout", function(d) {
-                    onMouseOut(d);
-                })
-                .on("click", function(d) {
-                    onClick(d);
-                })
-                .style('fill', function (d) {
-                    if (d.NursingMidwiferyDensity == 0) {
-                        return "#EBDEF9";
-                    } else if (d.NursingMidwiferyDensity >= 20) {
-                        return "#541087";
-                    } else if (d.NursingMidwiferyDensity >= 10 && d.NursingMidwiferyDensity < 20) {
-                        return "#9A7DC6";
-                    } else if (d.NursingMidwiferyDensity > 0 && d.NursingMidwiferyDensity < 10) {
-                        return "#CDAEFF";
-                    }
-                });
-            bubble.append('title')
-                .text(function (d) {
-                    return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["NursingMidwiferyDensity"]);
-                });
-        })
+        bubble.append('title')
+            .text(function (d) {
+                return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["NursingMidwiferyDensity"]);
+            });
     }
 
-    function setupVis3(margin, width, height, currYear) {
-        margin = {top: -5, right: -4, bottom: 10, left: 5};
-        width = 145;
-        height = 175;
-        var svg = d3.select('#row3')
-            .append('svg')
-            .attr('width', width + margin.left + margin.right)
-            .attr('height', height + margin.top + margin.bottom)
+    function setupVis3(svg, data, currYear, rowIndex) {
+        const width = 145;
+        const height = 175;
+        const margin = {top: rowIndex*height-5, right: -4, bottom: 10, left: (5 + (currYear-2000) * (width))};
+        
+        var svg = svg
             .append('g')
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-
 
         var xScale = d3.scaleLinear()
             .range([0, width]);
@@ -641,116 +629,105 @@
 
         var radius = d3.scaleSqrt()
             .range([3.5, 3.5]);
-        var xAxis = d3.axisBottom()
-            .scale(xScale)
-            .ticks(0)
-            .tickSizeOuter(0);
+        // var xAxis = d3.axisBottom()
+        //     .scale(xScale)
+        //     .ticks(0)
+        //     .tickSizeOuter(0);
+        //
+        // if (currYear === 2000) {
+        //     var yAxis = d3.axisLeft()
+        //         .scale(yScale)
+        //         .ticks(0)
+        //         .tickSizeOuter(0);
+        // }
+        // else {
+        //     var yAxis = d3.axisLeft()
+        //         .scale(yScale)
+        //         .ticks(0)
+        //         .tickSizeOuter(0);
+        // }
 
-        if (currYear === 2000) {
-            var yAxis = d3.axisLeft()
-                .scale(yScale)
-                .ticks(0)
-                .tickSizeOuter(0);
-        }
-        else {
-            var yAxis = d3.axisLeft()
-                .scale(yScale)
-                .ticks(0)
-                .tickSizeOuter(0);
-        }
-        d3.csv('583 Data Set v2 Project.csv', function (error, data) {
-            data.forEach(function (d) {
-                d.PhysicianDensity = +d.PhysicianDensity;
-                d.NursingMidwiferyDensity = +d.NursingMidwiferyDensity;
-                d.DentistryDensity = +d.DentistryDensity;
-                d.PharmaceuticalDensity = +d.PharmaceuticalDensity;
-                d.LifeExpectancy = +d.LifeExpectancy;
-                d.GDPPerCapita = +d.GDPPerCapita;
+        xScale.domain(d3.extent(data, function (d) {
+            return d.GDPPerCapita;
+        })).nice();
+
+        yScale.domain(d3.extent(data, function (d) {
+            return d.LifeExpectancy + 2;
+        })).nice();
+
+        radius.domain(d3.extent(data, function (d) {
+            return d.DentistryDensity;
+        })).nice();
+
+        // var xAxisElements = svg.append('g')
+        //     .attr('transform', 'translate(-5,180)')
+        //     .attr('class', 'x axis')
+        //     .call(xAxis);
+        // xAxisElements.selectAll("text").remove();
+        //
+        // var yAxisElements = svg.append('g')
+        //     .attr('transform', 'translate(-5,5)')
+        //     .attr('class', 'y axis')
+        //     .call(yAxis);
+        // if (currYear != 2000) {
+        //     yAxisElements.selectAll("text").remove();
+        // }
+
+        let dataFiltered = data.filter(d => d.Year == currYear);
+
+        var bubble = svg.selectAll('.bubble')
+            .data(dataFiltered)
+            .datum({isClicked: false})
+            .enter().append('circle')
+            // .filter(function (d) {
+            //     return d.Year == currYear;
+            // })
+            .attr('class', d => 'bubble country-' + d.CountryNoWhitespace + ' year-'+d.Year)
+            .classed('dentist', 'dentist')
+            .attr('cx', function (d) {
+                return xScale (d.GDPPerCapita);
+            })
+            .attr('cy', function (d) {
+                return yScale(d.LifeExpectancy);
+            })
+            .attr('r', function (d) {
+                return radius(d.DentistryDensity);
+            })
+            .on("mouseover", function(d) {
+                onMouseOver(d);
+            })
+            .on("mouseout", function(d) {
+                onMouseOut(d);
+            })
+            .on("click", function(d) {
+                onClick(d);
+            })
+            .style('fill', function (d) {
+                if (d.DentistryDensity == 0) {
+                    return "#DDFFAD";
+                } else if (d.DentistryDensity >= 1.6) {
+                    return "#35491F";
+                } else if (d.DentistryDensity >= 0.8 && d.DentistryDensity < 1.6) {
+                    return "#759046";
+                } else if (d.DentistryDensity > 0 && d.DentistryDensity < 0.8) {
+                    return "#A7C96A";
+                }
             });
 
-            xScale.domain(d3.extent(data, function (d) {
-                return d.GDPPerCapita;
-            })).nice();
-
-            yScale.domain(d3.extent(data, function (d) {
-                return d.LifeExpectancy + 2;
-            })).nice();
-
-            radius.domain(d3.extent(data, function (d) {
-                return d.DentistryDensity;
-            })).nice();
-
-            var xAxisElements = svg.append('g')
-                .attr('transform', 'translate(-5,180)')
-                .attr('class', 'x axis')
-                .call(xAxis);
-            xAxisElements.selectAll("text").remove();
-
-            var yAxisElements = svg.append('g')
-                .attr('transform', 'translate(-5,5)')
-                .attr('class', 'y axis')
-                .call(yAxis);
-            if (currYear != 2000) {
-                yAxisElements.selectAll("text").remove();
-            }
-
-            var bubble = svg.selectAll('.bubble')
-                .data(data)
-                .datum({isClicked: false})
-                .enter().append('circle')
-                .filter(function (d) {
-                    return d.Year == currYear;
-                })
-                .attr('class', 'bubble')
-                .classed('dentist', 'dentist')
-                .attr('cx', function (d) {
-                    return xScale (d.GDPPerCapita);
-                })
-                .attr('cy', function (d) {
-                    return yScale(d.LifeExpectancy);
-                })
-                .attr('r', function (d) {
-                    return radius(d.DentistryDensity);
-                })
-                .on("mouseover", function(d) {
-                    onMouseOver(d);
-                })
-                .on("mouseout", function(d) {
-                    onMouseOut(d);
-                })
-                .on("click", function(d) {
-                    onClick(d);
-                })
-                .style('fill', function (d) {
-                    if (d.DentistryDensity == 0) {
-                        return "#DDFFAD";
-                    } else if (d.DentistryDensity >= 1.6) {
-                        return "#35491F";
-                    } else if (d.DentistryDensity >= 0.8 && d.DentistryDensity < 1.6) {
-                        return "#759046";
-                    } else if (d.DentistryDensity > 0 && d.DentistryDensity < 0.8) {
-                        return "#A7C96A";
-                    }
-                });
-
-            bubble.append('title')
-                .text(function (d) {
-                    return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["DentistryDensity"]);
-                });
-        })
+        bubble.append('title')
+            .text(function (d) {
+                return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["DentistryDensity"]);
+            });
     }
 
-    function setupVis4(margin, width, height, currYear) {
-        margin = {top: -5, right: -4, bottom: 10, left: 5};
-        width = 145;
-        height = 175;
-        var svg = d3.select('#row4')
-            .append('svg')
-            .attr('width', width + margin.left + margin.right)
-            .attr('height', height + margin.top + margin.bottom)
+    function setupVis4(svg, data, currYear, rowIndex) {
+        const width = 145;
+        const height = 175;
+        const margin = {top: rowIndex*height-5, right: -4, bottom: 10, left: (5 + (currYear-2000) * (width))};
+
+        var svg = svg
             .append('g')
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-
 
         var xScale = d3.scaleLinear()
             .range([0, width]);
@@ -760,114 +737,103 @@
 
         var radius = d3.scaleSqrt()
             .range([3.5, 3.5]);
-        var xAxis = d3.axisBottom()
-            .scale(xScale)
-            .ticks(0)
-            .tickSizeOuter(0);
+        // var xAxis = d3.axisBottom()
+        //     .scale(xScale)
+        //     .ticks(0)
+        //     .tickSizeOuter(0);
+        //
+        // if (currYear === 2000) {
+        //     var yAxis = d3.axisLeft()
+        //         .scale(yScale)
+        //         .ticks(0)
+        //         .tickSizeOuter(0);
+        // }
+        // else {
+        //     var yAxis = d3.axisLeft()
+        //         .scale(yScale)
+        //         .ticks(0)
+        //         .tickSizeOuter(0);
+        // }
 
-        if (currYear === 2000) {
-            var yAxis = d3.axisLeft()
-                .scale(yScale)
-                .ticks(0)
-                .tickSizeOuter(0);
-        }
-        else {
-            var yAxis = d3.axisLeft()
-                .scale(yScale)
-                .ticks(0)
-                .tickSizeOuter(0);
-        }
+        xScale.domain(d3.extent(data, function (d) {
+            return d.GDPPerCapita;
+        })).nice();
 
-        d3.csv('583 Data Set v2 Project.csv', function (error, data) {
-            data.forEach(function (d) {
-                d.PhysicianDensity = +d.PhysicianDensity;
-                d.NursingMidwiferyDensity = +d.NursingMidwiferyDensity;
-                d.DentistryDensity = +d.DentistryDensity;
-                d.PharmaceuticalDensity = +d.PharmaceuticalDensity;
-                d.LifeExpectancy = +d.LifeExpectancy;
-                d.GDPPerCapita = +d.GDPPerCapita;
+        yScale.domain(d3.extent(data, function (d) {
+            return d.LifeExpectancy +2;
+        })).nice();
+
+        radius.domain(d3.extent(data, function (d) {
+            return d.PharmaceuticalDensity;
+        })).nice();
+
+        // var xAxisElements = svg.append('g')
+        //     .attr('transform', 'translate(-5,180)')
+        //     .attr('class', 'x axis')
+        //     .call(xAxis);
+        // xAxisElements.selectAll("text").remove();
+        //
+        // var yAxisElements = svg.append('g')
+        //     .attr('transform', 'translate(-5,5)')
+        //     .attr('class', 'y axis')
+        //     .call(yAxis);
+        // if (currYear != 2000) {
+        //     yAxisElements.selectAll("text").remove();
+        // }
+
+        let dataFiltered = data.filter(d => d.Year == currYear);
+
+        var bubble = svg.selectAll('.bubble')
+            .data(dataFiltered)
+            .datum({isClicked: false})
+            .enter().append('circle')
+            .attr('class', d => 'bubble country-' + d.CountryNoWhitespace + ' year-'+d.Year)
+            .classed('pharmacist', 'pharmacist')
+            .attr('cx', function (d) {
+                return xScale (d.GDPPerCapita);
+            })
+            .attr('cy', function (d) {
+                return yScale(d.LifeExpectancy);
+            })
+            .attr('r', function (d) {
+                return radius(d.PharmaceuticalDensity);
+            })
+            .on("mouseover", function(d) {
+                onMouseOver(d);
+            })
+            .on("mouseout", function(d) {
+                onMouseOut(d);
+            })
+            .on("click", function(d) {
+                onClick(d);
+            })
+            .style('fill', function (d) {
+                if (d.PharmaceuticalDensity == 0) {
+                    return "#FF9FC4";
+                } else if (d.PharmaceuticalDensity >= 1.7) {
+                    return "#7F0506";
+                } else if (d.PharmaceuticalDensity >= 0.9 && d.PharmaceuticalDensity < 1.7) {
+                    return "#A80951";
+                } else if (d.PharmaceuticalDensity > 0 && d.PharmaceuticalDensity < 0.9) {
+                    return "#D90081";
+                }
             });
-
-            xScale.domain(d3.extent(data, function (d) {
-                return d.GDPPerCapita;
-            })).nice();
-
-            yScale.domain(d3.extent(data, function (d) {
-                return d.LifeExpectancy +2;
-            })).nice();
-
-            radius.domain(d3.extent(data, function (d) {
-                return d.PharmaceuticalDensity;
-            })).nice();
-
-            var xAxisElements = svg.append('g')
-                .attr('transform', 'translate(-5,180)')
-                .attr('class', 'x axis')
-                .call(xAxis);
-            xAxisElements.selectAll("text").remove();
-
-            var yAxisElements = svg.append('g')
-                .attr('transform', 'translate(-5,5)')
-                .attr('class', 'y axis')
-                .call(yAxis);
-            if (currYear != 2000) {
-                yAxisElements.selectAll("text").remove();
-            }
-
-            var bubble = svg.selectAll('.bubble')
-                .data(data)
-                .datum({isClicked: false})
-                .enter().append('circle')
-                .filter(function (d) {
-                    return d.Year == currYear;
-                })
-                .attr('class', 'bubble')
-                .classed('pharmacist', 'pharmacist')
-                .attr('cx', function (d) {
-                    return xScale (d.GDPPerCapita);
-                })
-                .attr('cy', function (d) {
-                    return yScale(d.LifeExpectancy);
-                })
-                .attr('r', function (d) {
-                    return radius(d.PharmaceuticalDensity);
-                })
-                .on("mouseover", function(d) {
-                    onMouseOver(d);
-                })
-                .on("mouseout", function(d) {
-                    onMouseOut(d);
-                })
-                .on("click", function(d) {
-                    onClick(d);
-                })
-                .style('fill', function (d) {
-                    if (d.PharmaceuticalDensity == 0) {
-                        return "#FF9FC4";
-                    } else if (d.PharmaceuticalDensity >= 1.7) {
-                        return "#7F0506";
-                    } else if (d.PharmaceuticalDensity >= 0.9 && d.PharmaceuticalDensity < 1.7) {
-                        return "#A80951";
-                    } else if (d.PharmaceuticalDensity > 0 && d.PharmaceuticalDensity < 0.9) {
-                        return "#D90081";
-                    }
-                });
-            bubble.append('title')
-                .text(function (d) {
-                    return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["PharmaceuticalDensity"]);
-                });
-        })
-
+        bubble.append('title')
+            .text(function (d) {
+                return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["PharmaceuticalDensity"]);
+            });
     }
     function onMouseOver(data){
-        e.selectAll(".pharmacist")
-            .select(function (d) {
-                return d["Country"] === data["Country"] ? this : null
-            })
-                .transition()
-                .attr("r", 10.0)
-                .style('stroke', function (d) {
-                if (d.PharmaceuticalDensity == 0) {
+        console.log(data);
+        e.selectAll(".pharmacist.country-" + data.CountryNoWhitespace)
+            // .select(function (d) {
+            //     return d["Country"] === data["Country"] ? this : null
+            // })
+            .classed('hovered', true)
+            .transition()
+            .attr("r", 10.0)
+            .style('stroke', function (d) {
+            if (d.PharmaceuticalDensity == 0) {
                     return "#FF9FC4";
                 } else if (d.PharmaceuticalDensity >= 1.7) {
                     return "#7F0506";
@@ -883,10 +849,11 @@
             .attr("r", 5.0)
 
 
-        e.selectAll(".dentist")
-            .select(function (d) {
-                return d["Country"] === data["Country"] ? this : null
-            })
+        e.selectAll(".dentist.country-" + data.CountryNoWhitespace)
+            // .select(function (d) {
+            //     return d["Country"] === data["Country"] ? this : null
+            // })
+            .classed('hovered', true)
             .transition()
             .attr("r", 10.0)
             .style('stroke', function (d) {
@@ -905,10 +872,11 @@
             .style("fill", "white")
             .attr("r", 5.0)
 
-        e.selectAll(".nurse")
-            .select(function (d) {
-                return d["Country"] === data["Country"] ? this : null
-            })
+        e.selectAll(".nurse.country-" + data.CountryNoWhitespace)
+            // .select(function (d) {
+            //     return d["Country"] === data["Country"] ? this : null
+            // })
+            .classed('hovered', true)
             .transition()
             .attr("r", 10.0)
             .style('stroke', function (d) {
@@ -927,10 +895,11 @@
             .style("fill", "white")
             .attr("r", 5.0)
 
-        e.selectAll(".physician")
-            .select(function (d) {
-                return d["Country"] === data["Country"] ? this : null
-            })
+        e.selectAll(".physician.country-" + data.CountryNoWhitespace)
+            // .select(function (d) {
+            //     return d["Country"] === data["Country"] ? this : null
+            // })
+            .classed('hovered', true)
             .transition()
             .attr("r", 10.0)
             .style('stroke', function (d) {
@@ -951,11 +920,12 @@
     }
 
     function onMouseOut(data) {
+        console.log(data);
         if (data.isClicked) {
-            e.selectAll(".pharmacist")
-                .select(function (d) {
-                    return d["Country"] === data["Country"] ? this : null
-                })
+            e.selectAll(".pharmacist.country-" + data.CountryNoWhitespace)
+                // .select(function (d) {
+                //     return d["Country"] === data["Country"] ? this : null
+                // })
                 .style('stroke', function (d) {
                     if (d.PharmaceuticalDensity == 0) {
                         return "#FF9FC4";
@@ -972,10 +942,10 @@
                 .attr("r", 5.0)
 
 
-            e.selectAll(".dentist")
-                .select(function (d) {
-                    return d["Country"] === data["Country"] ? this : null
-                })
+            e.selectAll(".dentist.country-" + data.CountryNoWhitespace)
+                // .select(function (d) {
+                //     return d["Country"] === data["Country"] ? this : null
+                // })
                 .style('stroke', function (d) {
                     if (d.DentistryDensity == 0) {
                         return "#DDFFAD";
@@ -991,10 +961,10 @@
                 .style("fill", "white")
                 .attr("r", 5.0)
 
-            e.selectAll(".nurse")
-                .select(function (d) {
-                    return d["Country"] === data["Country"] ? this : null
-                })
+            e.selectAll(".nurse.country-" + data.CountryNoWhitespace)
+                // .select(function (d) {
+                //     return d["Country"] === data["Country"] ? this : null
+                // })
                 .style('stroke', function (d) {
                     if (d.NursingMidwiferyDensity == 0) {
                         return "#EBDEF9";
@@ -1010,10 +980,10 @@
                 .style("fill", "white")
                 .attr("r", 5.0)
 
-            e.selectAll(".physician")
-                .select(function (d) {
-                    return d["Country"] === data["Country"] ? this : null
-                })
+            e.selectAll(".physician.country-" + data.CountryNoWhitespace)
+                // .select(function (d) {
+                //     return d["Country"] === data["Country"] ? this : null
+                // })
                     .style('stroke', function (d) {
                     if (d.PhysicianDensity == 0) {
                         return "#c6dcff";
@@ -1030,7 +1000,8 @@
                 .attr("r", 5.0)
         }
         if (!data.isClicked) {
-            e.selectAll(".pharmacist")
+            e.selectAll(".pharmacist.hovered")
+                .classed('hovered', false)
                 .select(function (d) {
                     return !d.isClicked ? this : null
                 })
@@ -1049,8 +1020,8 @@
                 .style('stroke-width', 0)
                 .attr("r", 3.5)
 
-
-            e.selectAll(".dentist")
+            e.selectAll(".dentist.hovered")
+                .classed('hovered', false)
                 .select(function (d) {
                     return !d.isClicked ? this : null
                 })
@@ -1069,7 +1040,8 @@
                 .style('stroke-width', 0)
                 .attr("r", 3.5)
 
-            e.selectAll(".nurse")
+            e.selectAll(".nurse.hovered")
+                .classed('hovered', false)
                 .select(function (d) {
                     return !d.isClicked ? this : null
                 })
@@ -1088,7 +1060,8 @@
                 .style('stroke-width', 0)
                 .attr("r", 3.5)
 
-            e.selectAll(".physician")
+            e.selectAll(".physician.hovered")
+                .classed('hovered', false)
                 .select(function (d) {
                     return !d.isClicked ? this : null
                 })
