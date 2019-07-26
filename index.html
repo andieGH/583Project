@@ -368,11 +368,11 @@
 <script type="text/javascript">
     var e = d3.select("html");
     var blueScale = d3.scaleSequential(d3.interpolateBlues);
-    var purpleScale = d3.scaleLinear().domain([1,9])
-        .range(["plum", "darkmagenta"])
+    var purpleScale = d3.scaleSequential(d3.interpolatePurples);
 
     var greenScale = d3.scaleSequential(d3.interpolateGreens);
-    var orangeScale = d3.scaleSequential(d3.interpolateOranges);
+    var pinkScale = d3.scaleLinear().domain([0,2.6])
+        .range(["mistyrose", "mediumvioletred"])
 
 
 
@@ -795,7 +795,7 @@
                 onClick(d);
             })
             .style('fill', function (d) {
-                return orangeScale(d.PharmaceuticalDensity)
+                return pinkScale(d.PharmaceuticalDensity)
             });
         bubble.append('title')
             .text(function (d) {
@@ -812,7 +812,7 @@
             .transition()
             .attr("r", 10.0)
             .style('stroke', function (d) {
-                return orangeScale(d.PharmaceuticalDensity)
+                return pinkScale(d.PharmaceuticalDensity)
             })
             .transition()
             .style('stroke-width', 2.5)
@@ -874,7 +874,7 @@
                 //     return d["Country"] === data["Country"] ? this : null
                 // })
                 .style('stroke', function (d) {
-                    return orangeScale(d.PharmaceuticalDensity)
+                    return pinkScale(d.PharmaceuticalDensity)
                 })
                 .style('stroke-width', 2.5)
                 .style("fill", "white")
@@ -922,7 +922,7 @@
                 })
                 .transition()
                 .style('fill', function (d) {
-                    return orangeScale(d.PharmaceuticalDensity)
+                    return pinkScale(d.PharmaceuticalDensity)
                 })
                 .style('stroke-width', 0)
                 .attr("r", 3.5)
@@ -991,7 +991,7 @@
         e.selectAll(".pharmacist")
             .style('fill', function (d) {
                 d.isClicked = false;
-                return orangeScale(d.PharmaceuticalDensity)
+                return pinkScale(d.PharmaceuticalDensity)
             })
             .style('stroke-width', 0)
             .attr("r", 3.5)
@@ -1042,7 +1042,7 @@
             .attr("r", 20.0)
             .style('stroke', function (d) {
                 d.isClicked = true;
-                return orangeScale(d.PharmaceuticalDensity)
+                return pinkScale(d.PharmaceuticalDensity)
             })
 
             .transition()
