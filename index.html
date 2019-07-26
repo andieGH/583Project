@@ -6,6 +6,10 @@
     <link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://d3js.org/colorbrewer.v1.min.js"></script>
+    <script src="https://d3js.org/d3-color.v1.min.js"></script>
+    <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
     <style type="text/css">
 
@@ -363,7 +367,14 @@
 </body>
 <script type="text/javascript">
     var e = d3.select("html");
-    var numClicks = 0;
+    var blueScale = d3.scaleSequential(d3.interpolateBlues);
+    var purpleScale = d3.scaleLinear().domain([1,9])
+        .range(["plum", "darkmagenta"])
+
+    var greenScale = d3.scaleSequential(d3.interpolateGreens);
+    var orangeScale = d3.scaleSequential(d3.interpolateOranges);
+
+
 
     window.onload = function() {
 
@@ -488,15 +499,7 @@
                 onClick(d);
             })
             .style('fill', function (d) {
-                if (d.PhysicianDensity == 0) {
-                    return "#c6dcff";
-                } else if (d.PhysicianDensity >= 5.2) {
-                    return "#022f77";
-                } else if (d.PhysicianDensity >= 2.6 && d.PhysicianDensity < 5.2) {
-                    return "#3f7ee2";
-                } else if (d.PhysicianDensity > 0 && d.PhysicianDensity < 2.6) {
-                    return "#76a5f2";
-                }
+                return blueScale(d.PhysicianDensity)
             });
 
         bubble.append('title')
@@ -596,15 +599,8 @@
                 onClick(d);
             })
             .style('fill', function (d) {
-                if (d.NursingMidwiferyDensity == 0) {
-                    return "#EBDEF9";
-                } else if (d.NursingMidwiferyDensity >= 20) {
-                    return "#541087";
-                } else if (d.NursingMidwiferyDensity >= 10 && d.NursingMidwiferyDensity < 20) {
-                    return "#9A7DC6";
-                } else if (d.NursingMidwiferyDensity > 0 && d.NursingMidwiferyDensity < 10) {
-                    return "#CDAEFF";
-                }
+                return purpleScale(d.NursingMidwiferyDensity)
+
             });
         bubble.append('title')
             .text(function (d) {
@@ -674,7 +670,6 @@
         // }
 
         let dataFiltered = data.filter(d => d.Year == currYear);
-
         var bubble = svg.selectAll('.bubble')
             .data(dataFiltered)
             .datum({isClicked: false})
@@ -703,15 +698,7 @@
                 onClick(d);
             })
             .style('fill', function (d) {
-                if (d.DentistryDensity == 0) {
-                    return "#DDFFAD";
-                } else if (d.DentistryDensity >= 1.6) {
-                    return "#35491F";
-                } else if (d.DentistryDensity >= 0.8 && d.DentistryDensity < 1.6) {
-                    return "#759046";
-                } else if (d.DentistryDensity > 0 && d.DentistryDensity < 0.8) {
-                    return "#A7C96A";
-                }
+                return greenScale(d.DentistryDensity)
             });
 
         bubble.append('title')
@@ -808,15 +795,7 @@
                 onClick(d);
             })
             .style('fill', function (d) {
-                if (d.PharmaceuticalDensity == 0) {
-                    return "#FF9FC4";
-                } else if (d.PharmaceuticalDensity >= 1.7) {
-                    return "#7F0506";
-                } else if (d.PharmaceuticalDensity >= 0.9 && d.PharmaceuticalDensity < 1.7) {
-                    return "#A80951";
-                } else if (d.PharmaceuticalDensity > 0 && d.PharmaceuticalDensity < 0.9) {
-                    return "#D90081";
-                }
+                return orangeScale(d.PharmaceuticalDensity)
             });
         bubble.append('title')
             .text(function (d) {
@@ -833,15 +812,7 @@
             .transition()
             .attr("r", 10.0)
             .style('stroke', function (d) {
-            if (d.PharmaceuticalDensity == 0) {
-                    return "#FF9FC4";
-                } else if (d.PharmaceuticalDensity >= 1.7) {
-                    return "#7F0506";
-                } else if (d.PharmaceuticalDensity >= 0.9 && d.PharmaceuticalDensity < 1.7) {
-                    return "#A80951";
-                } else if (d.PharmaceuticalDensity > 0 && d.PharmaceuticalDensity < 0.9) {
-                    return "#D90081";
-                }
+                return orangeScale(d.PharmaceuticalDensity)
             })
             .transition()
             .style('stroke-width', 2.5)
@@ -857,15 +828,7 @@
             .transition()
             .attr("r", 10.0)
             .style('stroke', function (d) {
-                if (d.DentistryDensity == 0) {
-                    return "#DDFFAD";
-                } else if (d.DentistryDensity >= 1.6) {
-                    return "#35491F";
-                } else if (d.DentistryDensity >= 0.8 && d.DentistryDensity < 1.6) {
-                    return "#759046";
-                } else if (d.DentistryDensity > 0 && d.DentistryDensity < 0.8) {
-                    return "#A7C96A";
-                }
+                return greenScale(d.DentistryDensity)
             })
             .transition()
             .style('stroke-width', 2.5)
@@ -880,15 +843,7 @@
             .transition()
             .attr("r", 10.0)
             .style('stroke', function (d) {
-                if (d.NursingMidwiferyDensity == 0) {
-                    return "#EBDEF9";
-                } else if (d.NursingMidwiferyDensity >= 20) {
-                    return "#541087";
-                } else if (d.NursingMidwiferyDensity >= 10 && d.NursingMidwiferyDensity < 20) {
-                    return "#9A7DC6";
-                } else if (d.NursingMidwiferyDensity > 0 && d.NursingMidwiferyDensity < 10) {
-                    return "#CDAEFF";
-                }
+                return purpleScale(d.NursingMidwiferyDensity)
             })
             .transition()
             .style('stroke-width', 2.5)
@@ -903,15 +858,7 @@
             .transition()
             .attr("r", 10.0)
             .style('stroke', function (d) {
-                if (d.PhysicianDensity == 0) {
-                    return "#c6dcff";
-                } else if (d.PhysicianDensity >= 5.2) {
-                    return "#022f77";
-                } else if (d.PhysicianDensity >= 2.6 && d.PhysicianDensity < 5.2) {
-                    return "#3f7ee2";
-                } else if (d.PhysicianDensity > 0 && d.PhysicianDensity < 2.6) {
-                    return "#76a5f2";
-                }
+                return blueScale(d.PhysicianDensity)
             })
             .transition()
             .style('stroke-width', 2.5)
@@ -927,15 +874,7 @@
                 //     return d["Country"] === data["Country"] ? this : null
                 // })
                 .style('stroke', function (d) {
-                    if (d.PharmaceuticalDensity == 0) {
-                        return "#FF9FC4";
-                    } else if (d.PharmaceuticalDensity >= 1.7) {
-                        return "#7F0506";
-                    } else if (d.PharmaceuticalDensity >= 0.9 && d.PharmaceuticalDensity < 1.7) {
-                        return "#A80951";
-                    } else if (d.PharmaceuticalDensity > 0 && d.PharmaceuticalDensity < 0.9) {
-                        return "#D90081";
-                    }
+                    return orangeScale(d.PharmaceuticalDensity)
                 })
                 .style('stroke-width', 2.5)
                 .style("fill", "white")
@@ -947,15 +886,7 @@
                 //     return d["Country"] === data["Country"] ? this : null
                 // })
                 .style('stroke', function (d) {
-                    if (d.DentistryDensity == 0) {
-                        return "#DDFFAD";
-                    } else if (d.DentistryDensity >= 1.6) {
-                        return "#35491F";
-                    } else if (d.DentistryDensity >= 0.8 && d.DentistryDensity < 1.6) {
-                        return "#759046";
-                    } else if (d.DentistryDensity > 0 && d.DentistryDensity < 0.8) {
-                        return "#A7C96A";
-                    }
+                    return greenScale(d.DentistryDensity)
                 })
                 .style('stroke-width', 2.5)
                 .style("fill", "white")
@@ -966,15 +897,7 @@
                 //     return d["Country"] === data["Country"] ? this : null
                 // })
                 .style('stroke', function (d) {
-                    if (d.NursingMidwiferyDensity == 0) {
-                        return "#EBDEF9";
-                    } else if (d.NursingMidwiferyDensity >= 20) {
-                        return "#541087";
-                    } else if (d.NursingMidwiferyDensity >= 10 && d.NursingMidwiferyDensity < 20) {
-                        return "#9A7DC6";
-                    } else if (d.NursingMidwiferyDensity > 0 && d.NursingMidwiferyDensity < 10) {
-                        return "#CDAEFF";
-                    }
+                    return purpleScale(d.NursingMidwiferyDensity)
                 })
                 .style('stroke-width', 2.5)
                 .style("fill", "white")
@@ -985,16 +908,8 @@
                 //     return d["Country"] === data["Country"] ? this : null
                 // })
                     .style('stroke', function (d) {
-                    if (d.PhysicianDensity == 0) {
-                        return "#c6dcff";
-                    } else if (d.PhysicianDensity >= 5.2) {
-                        return "#022f77";
-                    } else if (d.PhysicianDensity >= 2.6 && d.PhysicianDensity < 5.2) {
-                        return "#3f7ee2";
-                    } else if (d.PhysicianDensity > 0 && d.PhysicianDensity < 2.6) {
-                        return "#76a5f2";
-                    }
-                })
+                        return blueScale(d.PhysicianDensity)
+                    })
                 .style("fill", "white")
                 .style('stroke-width', 2.5)
                 .attr("r", 5.0)
@@ -1007,15 +922,7 @@
                 })
                 .transition()
                 .style('fill', function (d) {
-                    if (d.PharmaceuticalDensity == 0) {
-                        return "#FF9FC4";
-                    } else if (d.PharmaceuticalDensity >= 1.7) {
-                        return "#7F0506";
-                    } else if (d.PharmaceuticalDensity >= 0.9 && d.PharmaceuticalDensity < 1.7) {
-                        return "#A80951";
-                    } else if (d.PharmaceuticalDensity > 0 && d.PharmaceuticalDensity < 0.9) {
-                        return "#D90081";
-                    }
+                    return orangeScale(d.PharmaceuticalDensity)
                 })
                 .style('stroke-width', 0)
                 .attr("r", 3.5)
@@ -1027,15 +934,7 @@
                 })
                 .transition()
                 .style('fill', function (d) {
-                    if (d.DentistryDensity == 0) {
-                        return "#DDFFAD";
-                    } else if (d.DentistryDensity >= 1.6) {
-                        return "#35491F";
-                    } else if (d.DentistryDensity >= 0.8 && d.DentistryDensity < 1.6) {
-                        return "#759046";
-                    } else if (d.DentistryDensity > 0 && d.DentistryDensity < 0.8) {
-                        return "#A7C96A";
-                    }
+                    return greenScale(d.DentistryDensity);
                 })
                 .style('stroke-width', 0)
                 .attr("r", 3.5)
@@ -1047,15 +946,8 @@
                 })
                 .transition()
                 .style('fill', function (d) {
-                    if (d.NursingMidwiferyDensity == 0) {
-                        return "#EBDEF9";
-                    } else if (d.NursingMidwiferyDensity >= 20) {
-                        return "#541087";
-                    } else if (d.NursingMidwiferyDensity >= 10 && d.NursingMidwiferyDensity < 20) {
-                        return "#9A7DC6";
-                    } else if (d.NursingMidwiferyDensity > 0 && d.NursingMidwiferyDensity < 10) {
-                        return "#CDAEFF";
-                    }
+                    return purpleScale(d.NursingMidwiferyDensity)
+
                 })
                 .style('stroke-width', 0)
                 .attr("r", 3.5)
@@ -1067,15 +959,7 @@
                 })
                 .transition()
                 .style('fill', function (d) {
-                    if (d.PhysicianDensity == 0) {
-                        return "#c6dcff";
-                    } else if (d.PhysicianDensity >= 5.2) {
-                        return "#022f77";
-                    } else if (d.PhysicianDensity >= 2.6 && d.PhysicianDensity < 5.2) {
-                        return "#3f7ee2";
-                    } else if (d.PhysicianDensity > 0 && d.PhysicianDensity < 2.6) {
-                        return "#76a5f2";
-                    }
+                    return blueScale(d.PhysicianDensity)
                 })
                 .style('stroke-width', 0)
                 .attr("r", 3.5)
@@ -1107,15 +991,7 @@
         e.selectAll(".pharmacist")
             .style('fill', function (d) {
                 d.isClicked = false;
-                if (d.PharmaceuticalDensity == 0) {
-                    return "#FF9FC4";
-                } else if (d.PharmaceuticalDensity >= 1.7) {
-                    return "#7F0506";
-                } else if (d.PharmaceuticalDensity >= 0.9 && d.PharmaceuticalDensity < 1.7) {
-                    return "#A80951";
-                } else if (d.PharmaceuticalDensity > 0 && d.PharmaceuticalDensity < 0.9) {
-                    return "#D90081";
-                }
+                return orangeScale(d.PharmaceuticalDensity)
             })
             .style('stroke-width', 0)
             .attr("r", 3.5)
@@ -1123,15 +999,8 @@
         e.selectAll(".dentist")
             .style('fill', function (d) {
                 d.isClicked = false;
-                if (d.DentistryDensity == 0) {
-                    return "#DDFFAD";
-                } else if (d.DentistryDensity >= 1.6) {
-                    return "#35491F";
-                } else if (d.DentistryDensity >= 0.8 && d.DentistryDensity < 1.6) {
-                    return "#759046";
-                } else if (d.DentistryDensity > 0 && d.DentistryDensity < 0.8) {
-                    return "#A7C96A";
-                }
+                return greenScale(d.DentistryDensity)
+
             })
             .style('stroke-width', 0)
             .attr("r", 3.5)
@@ -1139,15 +1008,8 @@
         e.selectAll(".nurse")
             .style('fill', function (d) {
                 d.isClicked = false;
-                if (d.NursingMidwiferyDensity == 0) {
-                    return "#EBDEF9";
-                } else if (d.NursingMidwiferyDensity >= 20) {
-                    return "#541087";
-                } else if (d.NursingMidwiferyDensity >= 10 && d.NursingMidwiferyDensity < 20) {
-                    return "#9A7DC6";
-                } else if (d.NursingMidwiferyDensity > 0 && d.NursingMidwiferyDensity < 10) {
-                    return "#CDAEFF";
-                }
+                return purpleScale(d.NursingMidwiferyDensity)
+
             })
             .style('stroke-width', 0)
             .attr("r", 3.5)
@@ -1155,15 +1017,8 @@
         e.selectAll(".physician")
             .style('fill', function (d) {
                 d.isClicked = false;
-                if (d.PhysicianDensity == 0) {
-                    return "#c6dcff";
-                } else if (d.PhysicianDensity >= 5.2) {
-                    return "#022f77";
-                } else if (d.PhysicianDensity >= 2.6 && d.PhysicianDensity < 5.2) {
-                    return "#3f7ee2";
-                } else if (d.PhysicianDensity > 0 && d.PhysicianDensity < 2.6) {
-                    return "#76a5f2";
-                }
+                return blueScale(d.PhysicianDensity)
+
             })
             .style('stroke-width', 0)
             .attr("r", 3.5)
@@ -1187,15 +1042,7 @@
             .attr("r", 20.0)
             .style('stroke', function (d) {
                 d.isClicked = true;
-                if (d.PharmaceuticalDensity == 0) {
-                    return "#FF9FC4";
-                } else if (d.PharmaceuticalDensity >= 1.7) {
-                    return "#7F0506";
-                } else if (d.PharmaceuticalDensity >= 0.9 && d.PharmaceuticalDensity < 1.7) {
-                    return "#A80951";
-                } else if (d.PharmaceuticalDensity > 0 && d.PharmaceuticalDensity < 0.9) {
-                    return "#D90081";
-                }
+                return orangeScale(d.PharmaceuticalDensity)
             })
 
             .transition()
@@ -1214,15 +1061,7 @@
             .attr("r", 20.0)
             .style('stroke', function (d) {
                 d.isClicked = true;
-                if (d.DentistryDensity == 0) {
-                    return "#DDFFAD";
-                } else if (d.DentistryDensity >= 1.6) {
-                    return "#35491F";
-                } else if (d.DentistryDensity >= 0.8 && d.DentistryDensity < 1.6) {
-                    return "#759046";
-                } else if (d.DentistryDensity > 0 && d.DentistryDensity < 0.8) {
-                    return "#A7C96A";
-                }
+                return greenScale(d.DentistryDensity)
             })
             .transition()
             .style('stroke-width', 2.5)
@@ -1240,15 +1079,7 @@
             .attr("r", 20.0)
             .style('stroke', function (d) {
                 d.isClicked = true;
-                if (d.NursingMidwiferyDensity == 0) {
-                    return "#EBDEF9";
-                } else if (d.NursingMidwiferyDensity >= 20) {
-                    return "#541087";
-                } else if (d.NursingMidwiferyDensity >= 10 && d.NursingMidwiferyDensity < 20) {
-                    return "#9A7DC6";
-                } else if (d.NursingMidwiferyDensity > 0 && d.NursingMidwiferyDensity < 10) {
-                    return "#CDAEFF";
-                }
+                return purpleScale(d.NursingMidwiferyDensity)
             })
             .transition()
             .style('stroke-width', 2.5)
@@ -1266,15 +1097,7 @@
             .attr("r", 20.0)
             .style('stroke', function (d) {
                 d.isClicked = true;
-                if (d.PhysicianDensity == 0) {
-                    return "#c6dcff";
-                } else if (d.PhysicianDensity >= 5.2) {
-                    return "#022f77";
-                } else if (d.PhysicianDensity >= 2.6 && d.PhysicianDensity < 5.2) {
-                    return "#3f7ee2";
-                } else if (d.PhysicianDensity > 0 && d.PhysicianDensity < 2.6) {
-                    return "#76a5f2";
-                }
+                return blueScale(d.PharmaceuticalDensity)
             })
             .transition()
             .style('stroke-width', 2.5)
