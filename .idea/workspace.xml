@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4a37c769-c27d-4528-a40c-98c68e9af6b7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-    </list>
+    <list default="true" id="4a37c769-c27d-4528-a40c-98c68e9af6b7" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -18,7 +16,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
+            <state relative-caret-position="653">
               <caret line="826" column="49" selection-start-line="826" selection-start-column="49" selection-end-line="826" selection-end-column="49" />
               <folding>
                 <element signature="n#style#0;n#h1#0;n#div#1;n#div#1;n#body#0;n#!!top" expanded="true" />
@@ -69,7 +67,6 @@
       <find>var radius</find>
       <find>clicks</find>
       <find>'stroke</find>
-      <find>space</find>
       <find>search</find>
       <find>msg</find>
       <find>h2</find>
@@ -79,6 +76,7 @@
       <find>Life</find>
       <find>yearbar</find>
       <find>scroll</find>
+      <find>space</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -182,12 +180,12 @@
       <workItem from="1555012511854" duration="301000" />
       <workItem from="1555452960348" duration="564000" />
       <workItem from="1555458467952" duration="422000" />
-      <workItem from="1560307096475" duration="2423000" />
+      <workItem from="1560307096475" duration="3075000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="129172000" />
+    <option name="totallyTimeSpent" value="129824000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="210" y="23" width="1172" height="850" extended-state="0" />
@@ -284,7 +282,7 @@
     <entry file="file://$PROJECT_DIR$/index v3.html" />
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
+        <state relative-caret-position="653">
           <caret line="826" column="49" selection-start-line="826" selection-start-column="49" selection-end-line="826" selection-end-column="49" />
           <folding>
             <element signature="n#style#0;n#h1#0;n#div#1;n#div#1;n#body#0;n#!!top" expanded="true" />
