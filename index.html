@@ -31,7 +31,7 @@
 
         .axis text {
             font-family: 'Quicksand', sans-serif;
-            font-size: 10px;
+            font-size: 16px;
             fill: black;
         }
 
@@ -87,21 +87,21 @@
             margin-left: -10px;
         }
 
-        #menu {
-            margin-top: 0px;
-            flex: 0 0 150px;
-            background-color: #d8d6d6;
-        }
-        #menu1, #menu2, #menu3, #menu4 {
-            height: 175px;
-            width: 100%;
-            flex: 1 auto;
-            margin: 0;
-            padding: 0;
-        }
-        #menu4 {
-            height: 177px;
-        }
+        /*#menu {*/
+        /*    margin-top: 0px;*/
+        /*    flex: 0 0 150px;*/
+        /*    background-color: #d8d6d6;*/
+        /*}*/
+        /*#menu1, #menu2, #menu3, #menu4 {*/
+        /*    height: 175px;*/
+        /*    width: 100%;*/
+        /*    flex: 1 auto;*/
+        /*    margin: 0;*/
+        /*    padding: 0;*/
+        /*}*/
+        /*#menu4 {*/
+        /*    height: 177px;*/
+        /*}*/
         #space {
             width: 100%;
             height: 20px;
@@ -249,6 +249,12 @@
             line-height: 0.3;
         }
 
+        #legend {
+            background-color: #d8d6d6;
+            font-weight: bolder;
+            font-size: 16px;
+        }
+        
         @media screen and (max-width: 875px) {
             p{
                 display: none;
@@ -281,45 +287,48 @@
         </div>
     </div>
         <div id="menu">
-            <div id="space2">
+<!--            <div id="space2">-->
 
-            </div>
-            <div id="menu1">
-                <h1 style="margin-top: 40px;">Physician Density</h1>
-                <ul class="legend">
-                    <li><span class="a" style="background-color: #022f77;"></span>5.2 +</li>
-                    <li><span class="b" style="background-color: #3f7ee2;"></span>2.6 - 5.1</li>
-                    <li><span class="c" style="background-color: #76a5f2;"></span>0.001 - 2.5</li>
-                    <li><span class="d" style="background-color: #c6dcff;"></span>NULL</li>
-                </ul>
-            </div>
-            <div id="menu2"><h1>Nursing + Midwifery Personnel Density</h1>
-                <ul class="legend">
-                    <li><span class="a" style="background-color: #541087;"></span>20.0 +</li>
-                    <li><span class="b" style="background-color: #9a7dc6;"></span>10.0- 19.9</li>
-                    <li><span class="c" style="background-color: #CDAEEF;"></span>0.001 - 9.9</li>
-                    <li><span class="d" style="background-color: #EBDEF9;"></span>NULL</li>
-                </ul>
-            </div>
-            <div id="menu3"><h1>Dental Personnel Density</h1>
-                <ul class="legend">
-                    <li><span class="a" style="background-color: #35491F;"></span>1.6 +</li>
-                    <li><span class="b" style="background-color: #759046;"></span>0.8 - 1.5</li>
-                    <li><span class="c" style="background-color: #A7C96A;"></span>0.001 - 0.7</li>
-                    <li><span class="d" style="background-color: #DDFFAD;"></span>NULL</li>
-                </ul>
-            </div>
-            <div id="menu4"><h1>Pharmaceutical Personnel Density</h1>
-                <ul class="legend">
-                    <li><span class="a" style="background-color: #7F0506;"></span>1.7 +</li>
-                    <li><span class="b" style="background-color: #A80951;"></span>0.9 - 1.6</li>
-                    <li><span class="c" style="background-color: #D90081;"></span>0.001 - 0.8</li>
-                    <li><span class="d" style="background-color: #FF9FC4;"></span>NULL</li>
-                </ul>
-            </div>
-            <div id="space">
+<!--            </div>-->
+<!--            <div id="menu1">-->
+<!--                <h1 style="margin-top: 40px;">Physician Density</h1>-->
+<!--                <ul class="legend">-->
+<!--                    <li><span class="a" style="background-color: #022f77;"></span>5.2 +</li>-->
+<!--                    <li><span class="b" style="background-color: #3f7ee2;"></span>2.6 - 5.1</li>-->
+<!--                    <li><span class="c" style="background-color: #76a5f2;"></span>0.001 - 2.5</li>-->
+<!--                    <li><span class="d" style="background-color: #c6dcff;"></span>NULL</li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--            <div id="menu2"><h1>Nursing + Midwifery Personnel Density</h1>-->
+<!--                <ul class="legend">-->
+<!--                    <li><span class="a" style="background-color: #541087;"></span>20.0 +</li>-->
+<!--                    <li><span class="b" style="background-color: #9a7dc6;"></span>10.0- 19.9</li>-->
+<!--                    <li><span class="c" style="background-color: #CDAEEF;"></span>0.001 - 9.9</li>-->
+<!--                    <li><span class="d" style="background-color: #EBDEF9;"></span>NULL</li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--            <div id="menu3"><h1>Dental Personnel Density</h1>-->
+<!--                <ul class="legend">-->
+<!--                    <li><span class="a" style="background-color: #35491F;"></span>1.6 +</li>-->
+<!--                    <li><span class="b" style="background-color: #759046;"></span>0.8 - 1.5</li>-->
+<!--                    <li><span class="c" style="background-color: #A7C96A;"></span>0.001 - 0.7</li>-->
+<!--                    <li><span class="d" style="background-color: #DDFFAD;"></span>NULL</li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--            <div id="menu4"><h1>Pharmaceutical Personnel Density</h1>-->
+<!--                <ul class="legend">-->
+<!--                    <li><span class="a" style="background-color: #7F0506;"></span>1.7 +</li>-->
+<!--                    <li><span class="b" style="background-color: #A80951;"></span>0.9 - 1.6</li>-->
+<!--                    <li><span class="c" style="background-color: #D90081;"></span>0.001 - 0.8</li>-->
+<!--                    <li><span class="d" style="background-color: #FF9FC4;"></span>NULL</li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--            <div id="space">-->
 
-            </div>
+<!--            </div>-->
+            <svg id="legend" width="150px" height="1000px">
+                
+            </svg>
         </div>
 
         <div id="container">
@@ -370,20 +379,78 @@
 <script type="text/javascript">
     let e = d3.select("html");
     const physicianScale = d3.scaleLinear()
-        .range(["#76a5f2", "#3f7ee2", "#022f77"])
+        // .range(["#76a5f2", "#3f7ee2", "#022f77"])
+        .range(["#76a5f2", "#022f77"])
         .unknown(d3.rgb("#c6dcff"));
 
     const nurseScale = d3.scaleLinear()
-        .range(["#541087", "#9a7dc6", "#CDAEEF"])
+        // .range(["#541087", "#9a7dc6", "#CDAEEF"])
+        .range(["#541087", "#CDAEEF"])
         .unknown(d3.rgb("#EBDEF9"));
 
     const dentistScale = d3.scaleLinear()
-        .range(["#A7C96A", "#759046", "#35491F"])
+        // .range(["#A7C96A", "#759046", "#35491F"])
+        .range(["#A7C96A", "#35491F"])
         .unknown(d3.rgb("#DDFFAD"));
 
     const pharmacistScale = d3.scaleLinear()
-        .range(["#D90081", "#A80951", "#7F0506"])
+        // .range(["#D90081", "#A80951", "#7F0506"])
+        .range(["#D90081", "#7F0506"])
         .unknown(d3.rgb("#FF9FC4"));
+
+    let legendArea = {};
+    legendArea.width = 150;
+
+    function createLegend(scale, yPosition, title) {
+        var w = 300, h = 50;
+
+        var key = d3.select("#legend");
+
+        var legend = key.append("defs")
+            .append("svg:linearGradient")
+            .attr("id", "gradient"+title)
+            .attr("x1", "100%")
+            .attr("y1", "100%")
+            .attr("x2", "100%")
+            .attr("y2", "0%")
+            .attr("spreadMethod", "pad");
+
+        legend.append("stop")
+            .attr("offset", "0%")
+            .attr("stop-color", scale(scale.domain()[0]))
+            .attr("stop-opacity", 1);
+
+        legend.append("stop")
+            .attr("offset", "100%")
+            .attr("stop-color", scale(scale.domain()[1]))
+            .attr("stop-opacity", 1);
+
+        key.append("rect")
+            .attr("width", 20)
+            .attr("height", 121)
+            .style("fill", "url(#gradient"+title+")")
+            .attr("transform", "translate(90,"+yPosition+")");
+
+        var y = d3.scaleLinear()
+            .range([120, 0])
+            .domain(scale.domain());
+
+        var yAxis = d3.axisLeft()
+            .scale(y)
+            .ticks(5);
+
+        key.append("g")
+            .attr("class", "y axis")
+            .attr("transform", "translate(90,"+yPosition+")")
+            .call(yAxis)
+            .append("text")
+            // .attr("transform", "rotate(-90)")
+            .attr("y", 0)
+            .attr("dx", "2em")
+            .attr("dy", "-1em")
+            .style("text-anchor", "end")
+            .text(title);
+    }
 
     window.onload = function() {
 
@@ -407,10 +474,17 @@
                 dentistScale.domain(d3.extent(data.filter(d => d.DentistryDensity), d => d.DentistryDensity)).nice();
                 pharmacistScale.domain(d3.extent(data.filter(d => d.PharmaceuticalDensity), d => d.PharmaceuticalDensity)).nice();
 
+                let legendPosition = 90;
+                
+                createLegend(physicianScale, legendPosition, "Physicians");
+                createLegend(nurseScale, legendPosition+175, "Nurses");
+                createLegend(dentistScale, legendPosition+2*175, "Dentists");
+                createLegend(pharmacistScale, legendPosition+3*175, "Pharmacists");
+
                 const svg = d3.select('#row1')
                     .append('svg')
                         .attr('width', 16*150)
-                        .attr('height', 4*175);
+                        .attr('height', 4*175+1);
         
         
                     for (var i = 2000; i <= 2015; i++) {
@@ -452,15 +526,15 @@
             .range([height, 0]);
 
         // Axes
-        // var xAxis = d3.axisBottom()
-        //     .scale(xScale)
-        //     .ticks(0)
-        //     .tickSizeOuter(0);
-        //
-        // var yAxis = d3.axisLeft()
-        //     .scale(yScale)
-        //     .ticks(0)
-        //     .tickSizeOuter(0);
+        var xAxis = d3.axisBottom()
+            .scale(xScale)
+            .ticks(0)
+            .tickSizeOuter(0);
+
+        var yAxis = d3.axisLeft()
+            .scale(yScale)
+            .ticks(0)
+            .tickSizeOuter(0);
 
         xScale.domain(d3.extent(data, function (d) {
             return d.GDPPerCapita;
@@ -470,16 +544,16 @@
             return d.LifeExpectancy + 2;
         })).nice();
 
-        // var xAxisElements = svg.append('g')
-        //     .attr('transform', 'translate(-5,180)')
-        //     .attr('class', 'x axis')
-        //     .call(xAxis);
-        // xAxisElements.selectAll("text").remove();
-        //
-        // var yAxisElements = svg.append('g')
-        //     .attr('transform', 'translate(-5,5)')
-        //     .attr('class', 'y axis')
-        //     .call(yAxis);
+        var xAxisElements = svg.append('g')
+            .attr('transform', 'translate(-5,180)')
+            .attr('class', 'x axis')
+            .call(xAxis);
+        xAxisElements.selectAll("text").remove();
+
+        var yAxisElements = svg.append('g')
+            .attr('transform', 'translate(-5,5)')
+            .attr('class', 'y axis')
+            .call(yAxis);
 
         let dataFiltered = data.filter(d => d.Year == currYear);
 
@@ -533,23 +607,23 @@
         var yScale = d3.scaleLinear()
             .range([height, 0]);
         
-        // var xAxis = d3.axisBottom()
-        //     .scale(xScale)
-        //     .ticks(0)
-        //     .tickSizeOuter(0);
-
-        // if (currYear === 2000) {
-        //     var yAxis = d3.axisLeft()
-        //         .scale(yScale)
-        //         .ticks(0)
-        //         .tickSizeOuter(0);
-        // }
-        // else {
-        //     var yAxis = d3.axisLeft()
-        //         .scale(yScale)
-        //         .ticks(0)
-        //         .tickSizeOuter(0);
-        // }
+        var xAxis = d3.axisBottom()
+            .scale(xScale)
+            .ticks(0)
+            .tickSizeOuter(0);
+        //
+        if (currYear === 2000) {
+            var yAxis = d3.axisLeft()
+                .scale(yScale)
+                .ticks(0)
+                .tickSizeOuter(0);
+        }
+        else {
+            var yAxis = d3.axisLeft()
+                .scale(yScale)
+                .ticks(0)
+                .tickSizeOuter(0);
+        }
 
         xScale.domain(d3.extent(data, function (d) {
             return d.GDPPerCapita;
@@ -559,19 +633,19 @@
             return d.LifeExpectancy + 2;
         })).nice();
 
-        // var xAxisElements = svg.append('g')
-        //     .attr('transform', 'translate(-5,180)')
-        //     .attr('class', 'x axis')
-        //     .call(xAxis);
-        // xAxisElements.selectAll("text").remove();
-        //
-        // var yAxisElements = svg.append('g')
-        //     .attr('transform', 'translate(-5,5)')
-        //     .attr('class', 'y axis')
-        //     .call(yAxis);
-        // if (currYear != 2000) {
-        //     yAxisElements.selectAll("text").remove();
-        // }
+        var xAxisElements = svg.append('g')
+            .attr('transform', 'translate(-5,180)')
+            .attr('class', 'x axis')
+            .call(xAxis);
+        xAxisElements.selectAll("text").remove();
+
+        var yAxisElements = svg.append('g')
+            .attr('transform', 'translate(-5,5)')
+            .attr('class', 'y axis')
+            .call(yAxis);
+        if (currYear != 2000) {
+            yAxisElements.selectAll("text").remove();
+        }
 
         let dataFiltered = data.filter(d => d.Year == currYear);
 
@@ -625,23 +699,23 @@
         var yScale = d3.scaleLinear()
             .range([height, 0]);
 
-        // var xAxis = d3.axisBottom()
-        //     .scale(xScale)
-        //     .ticks(0)
-        //     .tickSizeOuter(0);
-        //
-        // if (currYear === 2000) {
-        //     var yAxis = d3.axisLeft()
-        //         .scale(yScale)
-        //         .ticks(0)
-        //         .tickSizeOuter(0);
-        // }
-        // else {
-        //     var yAxis = d3.axisLeft()
-        //         .scale(yScale)
-        //         .ticks(0)
-        //         .tickSizeOuter(0);
-        // }
+        var xAxis = d3.axisBottom()
+            .scale(xScale)
+            .ticks(0)
+            .tickSizeOuter(0);
+
+        if (currYear === 2000) {
+            var yAxis = d3.axisLeft()
+                .scale(yScale)
+                .ticks(0)
+                .tickSizeOuter(0);
+        }
+        else {
+            var yAxis = d3.axisLeft()
+                .scale(yScale)
+                .ticks(0)
+                .tickSizeOuter(0);
+        }
 
         xScale.domain(d3.extent(data, function (d) {
             return d.GDPPerCapita;
@@ -651,19 +725,19 @@
             return d.LifeExpectancy + 2;
         })).nice();
 
-        // var xAxisElements = svg.append('g')
-        //     .attr('transform', 'translate(-5,180)')
-        //     .attr('class', 'x axis')
-        //     .call(xAxis);
-        // xAxisElements.selectAll("text").remove();
-        //
-        // var yAxisElements = svg.append('g')
-        //     .attr('transform', 'translate(-5,5)')
-        //     .attr('class', 'y axis')
-        //     .call(yAxis);
-        // if (currYear != 2000) {
-        //     yAxisElements.selectAll("text").remove();
-        // }
+        var xAxisElements = svg.append('g')
+            .attr('transform', 'translate(-5,180)')
+            .attr('class', 'x axis')
+            .call(xAxis);
+        xAxisElements.selectAll("text").remove();
+
+        var yAxisElements = svg.append('g')
+            .attr('transform', 'translate(-5,5)')
+            .attr('class', 'y axis')
+            .call(yAxis);
+        if (currYear != 2000) {
+            yAxisElements.selectAll("text").remove();
+        }
 
         let dataFiltered = data.filter(d => d.Year == currYear);
         var bubble = svg.selectAll('.bubble')
@@ -716,23 +790,23 @@
         var yScale = d3.scaleLinear()
             .range([height, 0]);
 
-        // var xAxis = d3.axisBottom()
-        //     .scale(xScale)
-        //     .ticks(0)
-        //     .tickSizeOuter(0);
-        //
-        // if (currYear === 2000) {
-        //     var yAxis = d3.axisLeft()
-        //         .scale(yScale)
-        //         .ticks(0)
-        //         .tickSizeOuter(0);
-        // }
-        // else {
-        //     var yAxis = d3.axisLeft()
-        //         .scale(yScale)
-        //         .ticks(0)
-        //         .tickSizeOuter(0);
-        // }
+        var xAxis = d3.axisBottom()
+            .scale(xScale)
+            .ticks(0)
+            .tickSizeOuter(0);
+
+        if (currYear === 2000) {
+            var yAxis = d3.axisLeft()
+                .scale(yScale)
+                .ticks(0)
+                .tickSizeOuter(0);
+        }
+        else {
+            var yAxis = d3.axisLeft()
+                .scale(yScale)
+                .ticks(0)
+                .tickSizeOuter(0);
+        }
 
         xScale.domain(d3.extent(data, function (d) {
             return d.GDPPerCapita;
@@ -742,19 +816,19 @@
             return d.LifeExpectancy +2;
         })).nice();
 
-        // var xAxisElements = svg.append('g')
-        //     .attr('transform', 'translate(-5,180)')
-        //     .attr('class', 'x axis')
-        //     .call(xAxis);
-        // xAxisElements.selectAll("text").remove();
-        //
-        // var yAxisElements = svg.append('g')
-        //     .attr('transform', 'translate(-5,5)')
-        //     .attr('class', 'y axis')
-        //     .call(yAxis);
-        // if (currYear != 2000) {
-        //     yAxisElements.selectAll("text").remove();
-        // }
+        var xAxisElements = svg.append('g')
+            .attr('transform', 'translate(-5,180)')
+            .attr('class', 'x axis')
+            .call(xAxis);
+        xAxisElements.selectAll("text").remove();
+
+        var yAxisElements = svg.append('g')
+            .attr('transform', 'translate(-5,5)')
+            .attr('class', 'y axis')
+            .call(yAxis);
+        if (currYear != 2000) {
+            yAxisElements.selectAll("text").remove();
+        }
 
         let dataFiltered = data.filter(d => d.Year == currYear);
 
