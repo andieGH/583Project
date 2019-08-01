@@ -606,7 +606,7 @@
             });
         bubble.append('title')
             .text(function (d) {
-                return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["NursingMidwiferyDensity"]);
+                return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["NursingMidwiferyDensity"]+ " " + "GDP Per Capita: " + d["GDPPerCapita"]);
             });
     }
 
@@ -697,7 +697,7 @@
 
         bubble.append('title')
             .text(function (d) {
-                return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["DentistryDensity"]);
+                return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["DentistryDensity"] + " " + "GDP Per Capita: " + d["GDPPerCapita"]);
             });
     }
 
@@ -785,7 +785,7 @@
             });
         bubble.append('title')
             .text(function (d) {
-                return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["PharmaceuticalDensity"]);
+                return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["PharmaceuticalDensity"] + " " + "GDP Per Capita: " + d["GDPPerCapita"]);
             });
     }
     function onMouseOver(data){
