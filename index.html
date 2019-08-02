@@ -467,6 +467,27 @@
             .attr("dy", "-1em")
             .style("text-anchor", "start")
             .text("personel density")
+
+        axis.append("rect")
+            .attr("class", "undefined")
+            .attr("width", 20)
+            .attr("height", 20)
+            .attr("y", 90)
+            .attr("fill", scale(undefined))
+
+        axis.append("line")
+            .attr("class", "undefined")
+            .attr("y1", 90)
+            .attr("y2", 110)
+            .attr("stroke", "black")
+
+        axis.append("text")
+        // .attr("transform", "rotate(-90)")
+            .attr("y", 100)
+            .attr("dx", "-9px")
+            .attr("dy", "0.5em")
+            .style("text-anchor", "end")
+            .text("null")
     }
 
     window.onload = function() {
