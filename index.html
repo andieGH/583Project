@@ -31,7 +31,7 @@
 
         .axis text {
             font-family: 'Quicksand', sans-serif;
-            font-size: 16px;
+            font-size: 14px;
             fill: black;
         }
 
@@ -177,11 +177,15 @@
 
         h3 {
             line-height: 4;
-            font-size: 12px;
+            font-size: 14px;
             transform: rotate(-90deg);
-
         }
 
+        h4 {
+            line-height: 4;
+            font-size: 14px;
+            text-align: center;
+        }
         #space3{
             white-space:nowrap;
             float: left;
@@ -373,8 +377,12 @@
             <div id="spaceForScroll">
 
             </div>
+
+            </div>
+            <h4> GDP Per Capita</h4>
         </div>
-        </div>
+
+
 </body>
 <script type="text/javascript">
     let e = d3.select("html");
@@ -385,7 +393,7 @@
 
     const nurseScale = d3.scaleLinear()
         // .range(["#541087", "#9a7dc6", "#CDAEEF"])
-        .range(["#541087", "#CDAEEF"])
+        .range(["#CDAEEF", "#541087"])
         .unknown(d3.rgb("#EBDEF9"));
 
     const dentistScale = d3.scaleLinear()
@@ -408,7 +416,7 @@
 
         var legend = key.append("defs")
             .append("svg:linearGradient")
-            .attr("id", "gradient"+title)
+            .attr("id", "gradient"+title.replace(/[\s\(\)]/g, '-'))
             .attr("x1", "100%")
             .attr("y1", "100%")
             .attr("x2", "100%")
@@ -427,29 +435,38 @@
 
         key.append("rect")
             .attr("width", 20)
-            .attr("height", 121)
-            .style("fill", "url(#gradient"+title+")")
+            .attr("height", 81)
+            .style("fill", "url(#gradient"+title.replace(/[\s\(\)]/g, '-')+")")
             .attr("transform", "translate(90,"+yPosition+")");
 
         var y = d3.scaleLinear()
-            .range([120, 0])
+            .range([80, 0])
             .domain(scale.domain());
 
         var yAxis = d3.axisLeft()
             .scale(y)
             .ticks(5);
 
-        key.append("g")
+        let axis = key.append("g")
             .attr("class", "y axis")
             .attr("transform", "translate(90,"+yPosition+")")
-            .call(yAxis)
-            .append("text")
-            // .attr("transform", "rotate(-90)")
+            .call(yAxis);
+
+        axis.append("text")
+        // .attr("transform", "rotate(-90)")
             .attr("y", 0)
-            .attr("dx", "2em")
-            .attr("dy", "-1em")
-            .style("text-anchor", "end")
-            .text(title);
+            .attr("dx", "-80px")
+            .attr("dy", "-1.5em")
+            .style("text-anchor", "start")
+            .text(title)
+
+        axis.append("text")
+        // .attr("transform", "rotate(-90)")
+            .attr("y", 0)
+            .attr("dx", "-80px")
+            .attr("dy", "-0.5em")
+            .style("text-anchor", "start")
+            .text("personel density")
     }
 
     window.onload = function() {
@@ -474,12 +491,12 @@
                 dentistScale.domain(d3.extent(data.filter(d => d.DentistryDensity), d => d.DentistryDensity)).nice();
                 pharmacistScale.domain(d3.extent(data.filter(d => d.PharmaceuticalDensity), d => d.PharmaceuticalDensity)).nice();
 
-                let legendPosition = 90;
+                let legendPosition = 100;
                 
-                createLegend(physicianScale, legendPosition, "Physicians");
-                createLegend(nurseScale, legendPosition+175, "Nurses");
-                createLegend(dentistScale, legendPosition+2*175, "Dentists");
-                createLegend(pharmacistScale, legendPosition+3*175, "Pharmacists");
+                createLegend(physicianScale, legendPosition, "Physician");
+                createLegend(nurseScale, legendPosition+175, "Nursing + Midwifery");
+                createLegend(dentistScale, legendPosition+2*175, "Dental");
+                createLegend(pharmacistScale, legendPosition+3*175, "Pharmaceutical");
 
                 const svg = d3.select('#row1')
                     .append('svg')
@@ -680,7 +697,7 @@
             });
         bubble.append('title')
             .text(function (d) {
-                return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["NursingMidwiferyDensity"]);
+                return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["NursingMidwiferyDensity"]+ " " + "GDP Per Capita: " + d["GDPPerCapita"]);
             });
     }
 
@@ -771,7 +788,7 @@
 
         bubble.append('title')
             .text(function (d) {
-                return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["DentistryDensity"]);
+                return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["DentistryDensity"] + " " + "GDP Per Capita: " + d["GDPPerCapita"]);
             });
     }
 
@@ -859,7 +876,7 @@
             });
         bubble.append('title')
             .text(function (d) {
-                return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["PharmaceuticalDensity"]);
+                return (d["Country"] + " Life Expectancy: " + d["LifeExpectancy"] + " Density: " + d["PharmaceuticalDensity"] + " " + "GDP Per Capita: " + d["GDPPerCapita"]);
             });
     }
     function onMouseOver(data){
