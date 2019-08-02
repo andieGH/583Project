@@ -456,7 +456,7 @@
         // .attr("transform", "rotate(-90)")
             .attr("y", 0)
             .attr("dx", "-80px")
-            .attr("dy", "-1.5em")
+            .attr("dy", "-2.5em")
             .style("text-anchor", "start")
             .text(title)
 
@@ -464,7 +464,7 @@
         // .attr("transform", "rotate(-90)")
             .attr("y", 0)
             .attr("dx", "-80px")
-            .attr("dy", "-0.5em")
+            .attr("dy", "-1em")
             .style("text-anchor", "start")
             .text("personel density")
     }
@@ -491,7 +491,7 @@
                 dentistScale.domain(d3.extent(data.filter(d => d.DentistryDensity), d => d.DentistryDensity)).nice();
                 pharmacistScale.domain(d3.extent(data.filter(d => d.PharmaceuticalDensity), d => d.PharmaceuticalDensity)).nice();
 
-                let legendPosition = 100;
+                let legendPosition = 110;
                 
                 createLegend(physicianScale, legendPosition, "Physician");
                 createLegend(nurseScale, legendPosition+175, "Nursing + Midwifery");
